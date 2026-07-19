@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /wishlist
+
+Sitemap: https://rnrfood.com/sitemap.xml

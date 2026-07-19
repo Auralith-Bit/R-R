@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>R&amp;R Food Products — Content Manager</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ───────────────── LOGIN SCREEN ───────────────── -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">R&amp;R</div>
+      <h1>Content Manager</h1>
+      <p class="muted">Log in to update your website's products, categories and photos.</p>
+      <form id="login-form">
+        <label>Username
+          <input type="text" id="login-username" autocomplete="username" required />
+        </label>
+        <label>Password
+          <input type="password" id="login-password" autocomplete="current-password" required />
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+        <p id="login-error" class="error-text" hidden></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ───────────────── MAIN APP ───────────────── -->
+  <div id="app" class="app" hidden>
+    <aside class="sidebar">
+      <div class="sidebar-logo">R&amp;R <span>Content Manager</span></div>
+      <nav>
+        <button class="nav-link active" data-tab="products">🍪 Products</button>
+        <button class="nav-link" data-tab="categories">🗂️ Categories</button>
+        <button class="nav-link" data-tab="team">👥 Team</button>
+        <button class="nav-link" data-tab="testimonials">💬 Testimonials</button>
+        <button class="nav-link" data-tab="pages">📄 Pages</button>
+        <button class="nav-link" data-tab="settings">⚙️ Site Settings</button>
+      </nav>
+      <div class="sidebar-footer">
+        <span id="whoami" class="muted"></span>
+        <button id="logout-btn" class="btn btn-ghost btn-small">Log out</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h2 id="page-title">Products</h2>
+        <a id="view-site-link" href="#" target="_blank" class="btn btn-ghost btn-small">View live website ↗</a>
+      </header>
+
+      <div id="toast" class="toast" hidden></div>
+
+      <section id="tab-products" class="tab-panel"></section>
+      <section id="tab-categories" class="tab-panel" hidden></section>
+      <section id="tab-team" class="tab-panel" hidden></section>
+      <section id="tab-testimonials" class="tab-panel" hidden></section>
+      <section id="tab-pages" class="tab-panel" hidden></section>
+      <section id="tab-settings" class="tab-panel" hidden></section>
+    </main>
+  </div>
+
+  <!-- ───────────────── MODAL (shared) ───────────────── -->
+  <div id="modal-backdrop" class="modal-backdrop" hidden>
+    <div id="modal" class="modal"></div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/categories.js"></script>
+  <script src="js/simplelists.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
