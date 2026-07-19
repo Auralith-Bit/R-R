@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiShoppingBag, FiMessageCircle, FiArrowRight, FiCheck, FiStar, FiZap, FiHeart } from "react-icons/fi";
-import { FaStar, FaMedal, FaBuilding, FaShieldAlt, FaUsers, FaTruck, FaPlay, FaHome } from "react-icons/fa";
+import { FaStar, FaMedal, FaBuilding, FaShieldAlt, FaUsers, FaTruck, FaPlay, FaHome, FaAward, FaHandshake, FaClock, FaGlobeAsia } from "react-icons/fa";
 import ProductCard from "../components/ProductCard";
 import { useCatalog } from "../context/CatalogContext";
 import Seo from "../components/Seo";
@@ -221,25 +221,28 @@ export default function Home() {
       <section className="perks-marquee-section">
         <div className="perks-marquee-track">
           {[...(perksData.length ? perksData : [
-            { title: "10+", desc: "Years Of Experience" },
-            { title: "Modern", desc: "Manufacturing Unit" },
-            { title: "Best Quality", desc: "Raw Materials" },
-            { title: "Happy", desc: "Customers" },
-            { title: "Wide", desc: "Distribution Network" },
+            { title: "10+", desc: "Years Of Experience", icon: <FaClock /> },
+            { title: "Modern", desc: "Manufacturing Unit", icon: <FaBuilding /> },
+            { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
+            { title: "Happy", desc: "Customers", icon: <FaUsers /> },
+            { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
           ]), ...(perksData.length ? perksData : [
-            { title: "10+", desc: "Years Of Experience" },
-            { title: "Modern", desc: "Manufacturing Unit" },
-            { title: "Best Quality", desc: "Raw Materials" },
-            { title: "Happy", desc: "Customers" },
-            { title: "Wide", desc: "Distribution Network" },
+            { title: "10+", desc: "Years Of Experience", icon: <FaClock /> },
+            { title: "Modern", desc: "Manufacturing Unit", icon: <FaBuilding /> },
+            { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
+            { title: "Happy", desc: "Customers", icon: <FaUsers /> },
+            { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
           ]), ...(perksData.length ? perksData : [
-            { title: "10+", desc: "Years Of Experience" },
-            { title: "Modern", desc: "Manufacturing Unit" },
-            { title: "Best Quality", desc: "Raw Materials" },
-            { title: "Happy", desc: "Customers" },
-            { title: "Wide", desc: "Distribution Network" },
+            { title: "10+", desc: "Years Of Experience", icon: <FaClock /> },
+            { title: "Modern", desc: "Manufacturing Unit", icon: <FaBuilding /> },
+            { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
+            { title: "Happy", desc: "Customers", icon: <FaUsers /> },
+            { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
           ])].map((perk, i) => (
             <div key={`${perk.desc}-${i}`} className="perk-item">
+              <div className="perk-icon">
+                {perk.icon || <FaAward />}
+              </div>
               <div>
                 <h4 style={{ marginBottom: 2 }}>{perk.title}</h4>
                 <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0 }}>{perk.desc}</p>
@@ -251,11 +254,11 @@ export default function Home() {
 
       <section style={{ background: "#f7f2eb", padding: "60px 0" }}>
         <div className="container about-story-grid" style={{ alignItems: "stretch" }}>
-          <div style={{ height: "100%", minHeight: 400 }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <img
               src={encodeURI(aboutStorySec.image || "/images/abouthome.png")}
               alt="The R&R Story"
-              style={{ borderRadius: 16, width: "100%", height: "100%", minHeight: 400, objectFit: "cover" }}
+              style={{ borderRadius: 16, width: "100%", objectFit: "contain", maxHeight: 500 }}
             />
           </div>
           <div>
@@ -277,9 +280,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{ background: "var(--red)", color: "#fff", padding: "60px 0", textAlign: "center", marginTop: 40 }}>
+      <section style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", color: "#fff", padding: "48px 0", textAlign: "center", marginTop: 40 }}>
         <div className="container">
-          <h2 style={{ marginTop: 0 }}>{ctaBanner.heading || "Ready to stock up on Nepal's favorite snacks?"}</h2>
+          <h2 style={{ marginTop: 0, fontSize: "clamp(24px, 3vw, 36px)", color: "#fff" }}>{ctaBanner.heading || "Ready to stock up on Nepal's favorite snacks?"}</h2>
           <p style={{ maxWidth: 560, margin: "0 auto 24px", opacity: 0.9 }}>
             {ctaBanner.body || "Whether you're treating yourself or stocking your store, ordering is just a message away. Fast delivery guaranteed."}
           </p>

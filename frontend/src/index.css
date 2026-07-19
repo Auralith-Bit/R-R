@@ -199,12 +199,14 @@ select:focus {
 }
 .brand-text {
   white-space: nowrap;
+  font-size: 18px;
 }
 .brand-text small {
   display: block;
-  font-size: 11px;
+  font-size: 14px;
   color: var(--red-dark);
   font-weight: 600;
+  letter-spacing: 0.3px;
 }
 .nav-links {
   display: flex;
@@ -521,7 +523,7 @@ select:focus {
   min-height: 100dvh;
   padding: 0 clamp(20px, 6vw, 80px);
   max-width: 800px;
-  gap: clamp(8px, 1.8vh, 14px);
+  gap: clamp(14px, 2.8vh, 24px);
 }
 .home-hero__badge {
   display: inline-flex;
@@ -792,18 +794,30 @@ select:focus {
 .perks-marquee-section {
   overflow: hidden;
   background: var(--cream);
-  padding: 28px clamp(20px, 4vw, 64px);
+  padding: 36px clamp(20px, 4vw, 64px);
   border-top: 1px solid #eee4b8;
   border-bottom: 1px solid #eee4b8;
 }
 .perks-marquee-track {
   display: flex;
-  gap: 50px;
+  gap: 60px;
   width: max-content;
   animation: perksScroll 25s linear infinite;
 }
 .perks-marquee-track:hover {
   animation-play-state: paused;
+}
+.perk-item .perk-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(211, 47, 47, 0.1);
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 @keyframes perksScroll {
   0% { transform: translateX(0); }
@@ -1275,8 +1289,8 @@ select:focus {
 .mission-vision-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  max-width: 850px;
+  gap: 24px;
+  max-width: 960px;
   margin: 0 auto;
 }
 .manufacture-grid {
@@ -1352,19 +1366,24 @@ select:focus {
 }
 .quality-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 40px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
 }
 .scale-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
 }
 .advantages-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+  width: 100%;
+  justify-items: center;
 }
 .team-intro-grid {
   display: grid;
@@ -1382,8 +1401,8 @@ select:focus {
   padding: 40px 24px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  max-width: 800px;
+  gap: 24px;
+  max-width: 1020px;
   margin: 0 auto;
 }
 .team-avatar {
@@ -1416,18 +1435,18 @@ select:focus {
 .mission-card {
   position: relative;
   overflow: hidden;
-  padding: 28px;
-  border-radius: 14px;
+  padding: 36px 32px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .mission {
-  background: #A2322D;
+  background: #7E0F0F;
   color: white;
 }
 .vision {
-  background: #4C4122;
+  background: #212121;
   color: white;
 }
 .mission-card::before {
@@ -1487,7 +1506,6 @@ select:focus {
 .quality-image {
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
 /* ---------- Process Steps (single row) ---------- */
@@ -1612,7 +1630,7 @@ select:focus {
   padding-top: 40px;
   padding-bottom: 40px;
   display: grid;
-  grid-template-columns: 0.9fr 1.4fr;
+  grid-template-columns: 0.8fr 1.6fr;
   gap: 24px;
   align-items: start;
 }
@@ -1801,7 +1819,7 @@ select:focus {
     grid-template-columns: repeat(2, 1fr);
   }
   .advantages-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
   .team-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1926,7 +1944,8 @@ select:focus {
     grid-template-columns: repeat(2, 1fr);
   }
   .advantages-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
   }
   .varieties-why-grid,
   .manufacturing-why-grid {
@@ -2012,12 +2031,15 @@ select:focus {
   .perks-grid,
   .manufacture-grid,
   .scale-grid,
-  .advantages-grid,
   .team-grid,
   .quick-help-grid,
   .varieties-why-grid,
   .manufacturing-why-grid {
     grid-template-columns: 1fr 1fr;
+  }
+  .advantages-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
   .product-grid {
     grid-template-columns: 1fr 1fr;

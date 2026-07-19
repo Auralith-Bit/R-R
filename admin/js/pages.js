@@ -83,6 +83,16 @@ const PagesTab = (() => {
       const val = el.value.split("\n").map((s) => s.trim()).filter(Boolean);
       setNested(result, path, val);
     });
+    form.querySelectorAll("[data-field-objects]").forEach((el) => {
+      const path = el.dataset.fieldObjects;
+      const val = el.value.split("\n").map((s) => s.trim()).filter(Boolean).map((line) => {
+        const parts = line.split("|").map((p) => p.trim());
+        if (parts.length >= 3) return { title: parts[0], desc: parts[1], color: parts[2] };
+        if (parts.length === 2) return { title: parts[0], desc: parts[1] };
+        return { title: parts[0] };
+      });
+      setNested(result, path, val);
+    });
     return result;
   }
 
@@ -116,6 +126,23 @@ const PagesTab = (() => {
     const val = Array.isArray(arr) ? arr.join("\n") : "";
     return `<label class="full">${label} <span class="hint">(one per line)</span>
       <textarea data-field-array="${path}" rows="4" style="width:100%;padding:9px 11px;border:1px solid var(--border-color);border-radius:8px;font-size:14px;font-family:inherit;resize:vertical;">${UI.escapeHtml(val)}</textarea>
+    </label>`;
+  }
+
+  function listAreaObjects(label, path, data, fmt) {
+    const arr = getNested(data, path) || [];
+    let val = "";
+    if (Array.isArray(arr)) {
+      val = arr.map((item) => {
+        if (typeof item === "object" && item !== null) {
+          if (fmt === "3") return `${item.title || ""}|${item.desc || ""}|${item.color || ""}`;
+          return `${item.title || ""}|${item.desc || ""}`;
+        }
+        return String(item);
+      }).join("\n");
+    }
+    return `<label class="full">${label} <span class="hint">(format: ${fmt === "3" ? "title|description|color" : "title|description"})</span>
+      <textarea data-field-objects="${path}" rows="4" style="width:100%;padding:9px 11px;border:1px solid var(--border-color);border-radius:8px;font-size:14px;font-family:inherit;resize:vertical;">${UI.escapeHtml(val)}</textarea>
     </label>`;
   }
 
@@ -372,8 +399,8 @@ const PagesTab = (() => {
       <div class="form-grid">
         ${txt("Section Tag", "processSteps.tag", d)}
         ${txt("Heading", "processSteps.heading", d)}
-        ${txt("Intro Text", "processSteps.intro", d)}
       </div>
+      ${listAreaObjects("Steps (format: title|description|color)", "processSteps.steps", d, "3")}
 
       ${sectionHead("Facility Section")}
       <div class="form-grid">
@@ -382,6 +409,7 @@ const PagesTab = (() => {
         ${txt("Body", "facility.body", d)}
         ${txt("Image Path", "facility.image", d)}
       </div>
+      ${listAreaObjects("Features (format: title|description)", "facility.features", d)}
 
       ${sectionHead("CTA Section")}
       <div class="form-grid">
@@ -397,6 +425,7 @@ const PagesTab = (() => {
         ${txt("Section Tag", "capabilities.tag", d)}
         ${txt("Heading", "capabilities.heading", d)}
       </div>
+      ${listAreaObjects("Items (format: title|description)", "capabilities.items", d)}
     `;
   }
 

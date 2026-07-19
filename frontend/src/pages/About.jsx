@@ -46,12 +46,11 @@ export default function About() {
     return () => document.removeEventListener("click", onDocClick);
   }, [openTile]);
 
-  const advantages = advantagesSec.items || [
+  const advantages = [
     { title: "Delicious Taste", desc: "Authentic Nepali flavors that keep you coming back" },
     { title: "Multiple Size", desc: "From 12g to 1kg — a size for every need" },
     { title: "Affordable Pricing", desc: "Premium quality snacks at prices everyone can enjoy" },
     { title: "Trusted Quality", desc: "Rigorous testing ensures every pack is perfect" },
-    { title: "Consistent Experience", desc: "Same great taste in every single pack" },
   ];
 
   return (
@@ -90,26 +89,30 @@ export default function About() {
         </div>
         <div className="mission-vision-grid">
           <div className="mission-card mission">
-            <span style={{ fontSize: 16, fontWeight: 800, opacity: 0.5 }}>{(mv.mission || {}).number || "01"}</span>
-            <h3 style={{ margin: "4px 0 6px", fontSize: 18 }}>{(mv.mission || {}).title || "Our Mission"}</h3>
-            <p style={{ opacity: 0.9, lineHeight: 1.5, fontSize: 13, margin: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+              <span style={{ fontSize: 22 }}>🎯</span>
+              <h3 style={{ margin: 0, fontSize: 18, color: "#fff" }}>{(mv.mission || {}).title || "Our Mission"}</h3>
+            </div>
+            <p style={{ opacity: 0.9, lineHeight: 1.5, fontSize: 13, margin: 0, color: "#fff" }}>
               {(mv.mission || {}).body || "To become Nepal's most trusted and widely loved snack brand, recognized for quality, innovation, and the happiness we bring to our customers."}
             </p>
             <div style={{ display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
               {((mv.mission || {}).tags || ["Tasty", "Convenient", "Affordable"]).map((t) => (
-                <span key={t} style={{ background: "rgba(255,255,255,0.2)", padding: "3px 10px", borderRadius: 999, fontSize: 11 }}>{t}</span>
+                <span key={t} style={{ background: "rgba(240,185,11,0.2)", color: "#f0b90b", padding: "3px 10px", borderRadius: 999, fontSize: 11 }}>{t}</span>
               ))}
             </div>
           </div>
           <div className="mission-card vision">
-            <span style={{ fontSize: 16, fontWeight: 800, opacity: 0.5 }}>{(mv.vision || {}).number || "02"}</span>
-            <h3 style={{ margin: "4px 0 6px", fontSize: 18 }}>{(mv.vision || {}).title || "Our Vision"}</h3>
-            <p style={{ opacity: 0.9, lineHeight: 1.5, fontSize: 13, margin: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+              <span style={{ fontSize: 22 }}>🔭</span>
+              <h3 style={{ margin: 0, fontSize: 18, color: "#fff" }}>{(mv.vision || {}).title || "Our Vision"}</h3>
+            </div>
+            <p style={{ opacity: 0.9, lineHeight: 1.5, fontSize: 13, margin: 0, color: "#fff" }}>
               {(mv.vision || {}).body || "To inspire healthier snacking habits across Nepal by delivering innovative, delicious, and affordable products that bring families together and celebrate the joy of eating well."}
             </p>
             <div style={{ display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
               {((mv.vision || {}).tags || ["Innovative", "Loved", "Trusted"]).map((t) => (
-                <span key={t} style={{ background: "rgba(255,255,255,0.2)", padding: "3px 10px", borderRadius: 999, fontSize: 11 }}>{t}</span>
+                <span key={t} style={{ background: "rgba(240,185,11,0.2)", color: "#f0b90b", padding: "3px 10px", borderRadius: 999, fontSize: 11 }}>{t}</span>
               ))}
             </div>
           </div>
@@ -155,9 +158,9 @@ export default function About() {
         </div>
       </div>
 
-      <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
+      <div className="container" style={{ paddingTop: 48, paddingBottom: 48 }}>
         <div className="quality-grid">
-          <div className="quality-image" style={{ minHeight: 420 }}>
+          <div className="quality-image" style={{ minHeight: 420, background: "transparent" }}>
             <video autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 18, display: "block" }}>
               <source src={qualitySec.video || "/videos/RnR video.mp4"} type="video/mp4" />
             </video>
@@ -168,7 +171,6 @@ export default function About() {
             {(qualitySec.body || [
               "At Riya & Rakshya, quality isn't just a promise — it's our foundation. Every product undergoes rigorous testing at multiple stages of production, from raw material inspection to final packaging, ensuring consistency in taste, texture, and safety.",
               "Our manufacturing facility follows strict hygiene protocols, with regular audits and compliance checks. We use only premium-grade ingredients sourced from trusted suppliers, and our production lines are equipped with modern machinery that maintains precise quality standards.",
-              "From the moment raw materials arrive at our facility to the final seal on every pack, we leave nothing to chance. Our dedicated quality team monitors each batch, conducting taste tests, texture analysis, and safety evaluations — so you can enjoy every bite with complete confidence.",
             ]).map((para, i) => (
               <p key={i} style={{ lineHeight: 1.75, color: "var(--text-muted)" }}>{para}</p>
             ))}
@@ -181,10 +183,10 @@ export default function About() {
         </div>
       </div>
 
-      <div style={{ background: "var(--dark)", color: "#fff", padding: "60px 0" }}>
+      <div style={{ background: "#444444", color: "#fff", padding: "48px 0" }}>
         <div className="container" style={{ textAlign: "center" }}>
           <p style={{ color: "var(--gold)", fontWeight: 700, marginBottom: 6 }}>{scaleSec.tag || "OUR SCALE"}</p>
-          <h2 style={{ marginTop: 0, marginBottom: 32 }}>{scaleSec.heading || "Manufacturing At Scale"}</h2>
+          <h2 style={{ marginTop: 0, marginBottom: 28 }}>{scaleSec.heading || "Manufacturing At Scale"}</h2>
           <div className="scale-grid">
             {(scaleSec.stats || [
               ["50+", "Products Manufactured"],
@@ -194,9 +196,9 @@ export default function About() {
             ]).map((s) => {
               const [num, label] = Array.isArray(s) ? s : [s.value, s.label];
               return (
-                <div key={label} style={{ background: "#262626", borderRadius: 12, padding: 28 }}>
-                  <div style={{ fontSize: 30, fontWeight: 800, color: "var(--gold)" }}>{num}</div>
-                  <div style={{ fontSize: 13, opacity: 0.8 }}>{label}</div>
+                <div key={label} style={{ background: "#262626", borderRadius: 12, padding: "16px 10px", textAlign: "center" }}>
+                  <div style={{ fontSize: 26, fontWeight: 800, color: "var(--gold)" }}>{num}</div>
+                  <div style={{ fontSize: 12, opacity: 0.8 }}>{label}</div>
                 </div>
               );
             })}
@@ -211,9 +213,9 @@ export default function About() {
         </div>
         <div className="advantages-grid">
           {advantages.map((a, i) => (
-            <div key={a.title} className="adv-card" style={{ borderTop: `4px solid ${["#d32f2f", "#f0b90b", "#25d366", "#1976d2", "#7b1fa2"][i]}` }}>
-              <div className="adv-icon" style={{ color: ["#d32f2f", "#f0b90b", "#25d366", "#1976d2", "#7b1fa2"][i], background: ["rgba(211,47,47,0.1)", "rgba(240,185,11,0.1)", "rgba(37,211,102,0.1)", "rgba(25,118,210,0.1)", "rgba(123,31,162,0.1)"][i] }}>
-                {["🍽", "📦", "💰", "✅", "⭐"][i]}
+            <div key={a.title} className="adv-card" style={{ borderTop: `4px solid ${["#d32f2f", "#f0b90b", "#25d366", "#1976d2"][i]}` }}>
+              <div className="adv-icon" style={{ color: ["#d32f2f", "#f0b90b", "#25d366", "#1976d2"][i], background: ["rgba(211,47,47,0.1)", "rgba(240,185,11,0.1)", "rgba(37,211,102,0.1)", "rgba(25,118,210,0.1)"][i] }}>
+                {["🍽", "📦", "💰", "✅"][i]}
               </div>
               <h4>{a.title}</h4>
               <p>{a.desc}</p>
@@ -242,11 +244,11 @@ export default function About() {
         </div>
       </div>
 
-      <div style={{ background: "linear-gradient(90deg,#d14b39,#d17d2d,#caa431)", padding: "40px 0" }}>
+      <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", padding: "48px 0" }}>
         <div className="container cta-split-grid">
           <div style={{ color: "#fff" }}>
-            <h2 style={{ marginTop: 0 }}>{ctaSec.heading || "Ready to explore our snacks?"}</h2>
-            <p style={{ opacity: 0.9, marginBottom: 18 }}>
+            <h2 style={{ marginTop: 0, fontSize: "clamp(24px, 3vw, 36px)", color: "#fff", fontWeight: 700 }}>{ctaSec.heading || "Ready to explore our snacks?"}</h2>
+            <p style={{ opacity: 0.9, marginBottom: 18, color: "#fff" }}>
               {ctaSec.body || "Browse our wide collection of freshly crafted snacks, made with quality ingredients and authentic recipes."}
             </p>
             <Link to="/products" className="btn btn-white">{ctaSec.buttonText || "Explore Menu"}</Link>
@@ -272,12 +274,12 @@ export default function About() {
         <div className="container">
           <div className="team-grid">
             {team.map((m) => (
-              <div key={m.id} style={{ textAlign: "center", background: "#fff", borderRadius: 12, padding: "24px 18px", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-                <div className="team-avatar">
+              <div key={m.id} style={{ textAlign: "center", background: "#fff", borderRadius: 16, padding: "36px 24px 28px", boxShadow: "0 2px 12px rgba(0,0,0,0.06)", borderTop: "4px solid #C72D29" }}>
+                <div style={{ width: 80, height: 80, borderRadius: "50%", background: "linear-gradient(135deg, #C72D29, #D3A836)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", color: "#fff", fontSize: 22, fontWeight: 700, boxShadow: "0 4px 14px rgba(199,45,41,0.25)" }}>
                   {m.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                 </div>
-                <strong style={{ fontSize: 14 }}>{m.name}</strong>
-                <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{m.role}</div>
+                <strong style={{ fontSize: 15, display: "block", marginBottom: 4, color: "#262626" }}>{m.name}</strong>
+                <div style={{ fontSize: 12, color: "#C72D29", fontWeight: 600 }}>{m.role}</div>
               </div>
             ))}
           </div>

@@ -64,11 +64,11 @@ export default function ProductDetail() {
       />
 
       <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
-        <div className="product-detail-grid">
+        <div className="product-detail-grid" style={{ gridTemplateColumns: "0.8fr 1.2fr" }}>
           <img
             src={imgError ? "/images/Logo.png" : encodeURI(product.image)}
             alt={product.name}
-            style={{ width: "100%", borderRadius: 12, objectFit: "cover", maxHeight: 500 }}
+            style={{ width: "100%", borderRadius: 12, objectFit: "cover", maxHeight: 380 }}
             onError={() => setImgError(true)}
           />
           <div>

@@ -132,26 +132,26 @@ export default function Contact() {
 
       <div className="container contact-main-grid" style={{ paddingTop: 48, paddingBottom: 48 }}>
         <div>
-          <div style={{ background: "linear-gradient(120deg,#d94b2b,#f0b90b)", color: "#fff", borderRadius: 16, padding: 28 }}>
-            <h3 style={{ marginTop: 0 }}>{contactInfo.heading || "Get in Touch"}</h3>
+          <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", color: "#fff", borderRadius: 14, padding: 18 }}>
+            <h3 style={{ marginTop: 0, fontSize: 16, marginBottom: 8 }}>{contactInfo.heading || "Get in Touch"}</h3>
             {contactItems.map((item, i) => {
               const Icon = CONTACT_ICONS[i] || FiPhone;
               return (
-                <div key={i} style={{ display: "flex", gap: 12, padding: "14px 0", borderTop: i === 0 ? "none" : "1px solid rgba(255,255,255,0.2)" }}>
-                  <Icon size={20} />
+                <div key={i} style={{ display: "flex", gap: 8, padding: "7px 0", borderTop: i === 0 ? "none" : "1px solid rgba(255,255,255,0.2)" }}>
+                  <Icon size={16} style={{ marginTop: 2 }} />
                   <div>
-                    <strong style={{ display: "block", fontSize: 14 }}>{item.label}:</strong>
-                    <span style={{ fontSize: 13, opacity: 0.9 }}>{item.value}</span>
+                    <strong style={{ display: "block", fontSize: 12 }}>{item.label}:</strong>
+                    <span style={{ fontSize: 11, opacity: 0.9 }}>{item.value}</span>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          <div style={{ background: "#d9f2e3", borderRadius: 16, padding: 28, marginTop: 20, textAlign: "center" }}>
-            <FiMessageCircle size={28} color="#1b6f3c" />
-            <h4 style={{ margin: "10px 0 4px" }}>{whatsappHelp.heading || "Need Quick Help?"}</h4>
-            <p style={{ fontSize: 13, color: "#33613f" }}>
+          <div style={{ background: "#d9f2e3", borderRadius: 14, padding: 16, marginTop: 14, textAlign: "center" }}>
+            <FiMessageCircle size={22} color="#1b6f3c" />
+            <h4 style={{ margin: "6px 0 2px", fontSize: 14 }}>{whatsappHelp.heading || "Need Quick Help?"}</h4>
+            <p style={{ fontSize: 11, color: "#33613f", margin: "0 0 10px" }}>
               {whatsappHelp.body || "Message us directly on WhatsApp for immediate assistance."}
             </p>
             <a
@@ -159,6 +159,7 @@ export default function Contact() {
               target="_blank"
               rel="noreferrer"
               className="btn btn-whatsapp"
+              style={{ fontSize: 12, padding: "7px 16px" }}
             >
               <FiMessageCircle /> Chat on WhatsApp
             </a>
@@ -259,11 +260,11 @@ export default function Contact() {
         </div>
       </div>
 
-      <div style={{ background: "linear-gradient(120deg,#d94b2b,#f0b90b)", padding: "40px 0" }}>
+      <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", padding: "48px 0" }}>
         <div className="container cta-split-grid">
           <div style={{ color: "#fff" }}>
-            <h3 style={{ marginTop: 0 }}>{ctaSec.heading || "Ready to explore our snacks?"}</h3>
-            <p style={{ opacity: 0.9 }}>
+            <h2 style={{ marginTop: 0, fontSize: "clamp(24px, 3vw, 36px)", color: "#fff", fontWeight: 700 }}>{ctaSec.heading || "Ready to explore our snacks?"}</h2>
+            <p style={{ opacity: 0.9, color: "#fff" }}>
               {ctaSec.body || "Browse our wide collection of freshly crafted snacks, made with quality ingredients and authentic recipes."}
             </p>
             <Link to="/products" className="btn btn-white">{ctaSec.buttonText || "Explore Menu"}</Link>
