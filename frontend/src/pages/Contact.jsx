@@ -132,16 +132,16 @@ export default function Contact() {
 
       <div className="container contact-main-grid" style={{ paddingTop: 48, paddingBottom: 48 }}>
         <div>
-          <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", color: "#fff", borderRadius: 14, padding: 18 }}>
-            <h3 style={{ marginTop: 0, fontSize: 16, marginBottom: 8 }}>{contactInfo.heading || "Get in Touch"}</h3>
+          <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", color: "#fff", borderRadius: 14, padding: 22 }}>
+            <h3 style={{ marginTop: 0, fontSize: 18, marginBottom: 10, fontWeight: 700 }}>{contactInfo.heading || "Get in Touch"}</h3>
             {contactItems.map((item, i) => {
               const Icon = CONTACT_ICONS[i] || FiPhone;
               return (
-                <div key={i} style={{ display: "flex", gap: 8, padding: "7px 0", borderTop: i === 0 ? "none" : "1px solid rgba(255,255,255,0.2)" }}>
-                  <Icon size={16} style={{ marginTop: 2 }} />
+                <div key={i} style={{ display: "flex", gap: 10, padding: "9px 0", borderTop: i === 0 ? "none" : "1px solid rgba(255,255,255,0.25)" }}>
+                  <Icon size={17} style={{ marginTop: 2 }} />
                   <div>
-                    <strong style={{ display: "block", fontSize: 12 }}>{item.label}:</strong>
-                    <span style={{ fontSize: 11, opacity: 0.9 }}>{item.value}</span>
+                    <strong style={{ display: "block", fontSize: 13, fontWeight: 700 }}>{item.label}:</strong>
+                    <span style={{ fontSize: 12, opacity: 1, fontWeight: 500 }}>{item.value}</span>
                   </div>
                 </div>
               );

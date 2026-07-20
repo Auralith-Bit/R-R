@@ -80,7 +80,7 @@ export default function About() {
               <p key={i} style={{ lineHeight: 1.75, color: "var(--text-muted)" }}>{para}</p>
             ))}
           </div>
-          <img src={encodeURI(storySec.image || "/images/abouthome.png")} alt="R&R production line" style={{ borderRadius: 16, width: "100%" }} />
+          <img src={encodeURI(storySec.image || "/images/abouthome.png")} alt="R&R production line" loading="lazy" decoding="async" style={{ borderRadius: 16, width: "100%" }} />
         </div>
 
         <div style={{ textAlign: "center", margin: "60px 0 32px" }}>
@@ -185,8 +185,11 @@ export default function About() {
 
       <div style={{ background: "#444444", color: "#fff", padding: "48px 0" }}>
         <div className="container" style={{ textAlign: "center" }}>
-          <p style={{ color: "var(--gold)", fontWeight: 700, marginBottom: 6 }}>{scaleSec.tag || "OUR SCALE"}</p>
-          <h2 style={{ marginTop: 0, marginBottom: 28 }}>{scaleSec.heading || "Manufacturing At Scale"}</h2>
+          <p style={{ color: "var(--gold)", fontWeight: 700, marginBottom: 6, letterSpacing: 2, textTransform: "uppercase", fontSize: 13 }}>{scaleSec.tag || "OUR SCALE"}</p>
+          <h2 style={{ marginTop: 0, marginBottom: 12, color: "#fff", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700 }}>{scaleSec.heading || "Manufacturing At Scale"}</h2>
+          <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "clamp(13px, 1.2vw, 16px)", lineHeight: 1.7, maxWidth: 700, margin: "0 auto 28px" }}>
+            {scaleSec.body || "From a single production line to a state-of-the-art facility, we've scaled our operations to deliver quality snacks across all 77 districts of Nepal."}
+          </p>
           <div className="scale-grid">
             {(scaleSec.stats || [
               ["50+", "Products Manufactured"],
@@ -198,7 +201,7 @@ export default function About() {
               return (
                 <div key={label} style={{ background: "#262626", borderRadius: 12, padding: "16px 10px", textAlign: "center" }}>
                   <div style={{ fontSize: 26, fontWeight: 800, color: "var(--gold)" }}>{num}</div>
-                  <div style={{ fontSize: 12, opacity: 0.8 }}>{label}</div>
+                  <div style={{ fontSize: 12, color: "#fff", opacity: 0.9 }}>{label}</div>
                 </div>
               );
             })}

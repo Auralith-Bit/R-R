@@ -68,7 +68,7 @@ export default function ProductDetail() {
           <img
             src={imgError ? "/images/Logo.png" : encodeURI(product.image)}
             alt={product.name}
-            style={{ width: "100%", borderRadius: 12, objectFit: "cover", maxHeight: 380 }}
+            style={{ width: "100%", borderRadius: 12, objectFit: "contain" }}
             onError={() => setImgError(true)}
           />
           <div>

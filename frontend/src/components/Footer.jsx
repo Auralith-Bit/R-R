@@ -80,7 +80,7 @@ export default function Footer() {
         </div>
 
         <div className="subscribe-box">
-          <h4 style={{ marginBottom: 4 }}>{footerData.subscribeHeading || "Subscribe"}</h4>
+          <h4 style={{ marginBottom: 2, fontSize: 14 }}>{footerData.subscribeHeading || "Subscribe"}</h4>
           <form className="subscribe-form" onSubmit={handleSubscribe}>
             <input
               type="email"
@@ -94,19 +94,24 @@ export default function Footer() {
             </button>
           </form>
           {subscribed ? (
-            <p style={{ fontSize: 13, color: "var(--gold)" }}>
+            <p style={{ fontSize: 12, color: "var(--gold)", margin: 0 }}>
               Thanks for subscribing!
             </p>
           ) : (
-            <p style={{ fontSize: 13, lineHeight: 1.6 }}>
-              {footerData.subscribeDescription || "Subscribe to get the latest snack drops, offers and distributor news straight to your inbox."}
+            <p style={{ fontSize: 11, lineHeight: 1.4, margin: 0, color: "#888" }}>
+              {footerData.subscribeDescription || "Get the latest snack drops and offers straight to your inbox."}
             </p>
           )}
         </div>
       </div>
 
       <div className="container footer-bottom">
-        {footerData.copyright || "\u00a9 2026 Riya & Rakshya Food Products. All rights reserved."}
+        <p style={{ margin: "0 0 4px" }}>
+          {footerData.copyright || "\u00a9 2026 Riya & Rakshya Food Products. All rights reserved."}
+        </p>
+        <p style={{ margin: 0, fontSize: 12, color: "#666" }}>
+          Designed, Developed and Delivered by           <a href="https://auralithbit.com.np" target="_blank" rel="noreferrer" style={{ color: "var(--gold)", textDecoration: "none" }}>Auralith Bit</a>
+        </p>
       </div>
     </footer>
   );

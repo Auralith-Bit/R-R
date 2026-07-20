@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiMessageCircle, FiShoppingBag } from "react-icons/fi";
 import { FaLeaf, FaBolt, FaIndustry, FaFlask, FaClipboardCheck, FaWarehouse } from "react-icons/fa";
+import { ArrowRight, MessageCircle, Truck, BadgeCheck, Award, Check, ShieldCheck, Star, Leaf, Clock3, Shield } from "lucide-react";
 import PageHero from "../components/PageHero";
 import Seo from "../components/Seo";
 import { useCatalog } from "../context/CatalogContext";
@@ -60,38 +60,39 @@ export default function Manufacturing() {
         bgImage={hero.bgImage || "/images/manufacturinghero.png"}
       />
 
-      <section style={{ background: "#F3F3F3", padding: "60px 0", overflow: "hidden" }}>
+      {/* ── Process Steps ── */}
+      <section style={{ background: "var(--gray-bg)", padding: "48px 0", overflow: "hidden" }}>
         <div className="container">
           <div style={{ textAlign: "center", maxWidth: 920, margin: "0 auto" }}>
-            <p style={{ color: "var(--red)", fontWeight: 700, letterSpacing: 2, fontSize: 15, textTransform: "uppercase", marginBottom: 8 }}>
+            <p style={{ color: "var(--red)", fontWeight: 700, letterSpacing: 2, fontSize: 13, textTransform: "uppercase", marginBottom: 6 }}>
               {processSec.tag || "HOW WE MAKE"}
             </p>
-            <h2 style={{ marginTop: 0, fontSize: "clamp(28px, 3.5vw, 48px)", lineHeight: 1.15, fontWeight: 700 }}>
+            <h2 style={{ marginTop: 0, fontSize: "clamp(22px, 3vw, 38px)", lineHeight: 1.15, fontWeight: 700 }}>
               {processSec.heading || "From Quality Ingredients To Delicious Snacks"}
             </h2>
           </div>
-          <div style={{ position: "relative", marginTop: 50 }}>
+          <div style={{ position: "relative", marginTop: 36 }}>
             <div className="timeline-dashed-line" />
-            <div style={{ position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 16 }}>
+            <div className="process-steps-grid" style={{ position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 14 }}>
               {(processSec.steps || defaultTimelineSteps).map((step, i) => {
                 const Icon = stepIcons[i] || FaLeaf;
                 const color = step.color || stepColors[i] || "#D88C5B";
                 return (
                   <div key={step.title || i} style={{
-                    background: "#fff", borderRadius: 16, padding: "24px 14px", textAlign: "center",
+                    background: "#fff", borderRadius: "var(--radius)", padding: "18px 10px", textAlign: "center",
                     display: "flex", flexDirection: "column", alignItems: "center",
-                    boxShadow: "0 6px 20px rgba(0,0,0,0.06)", transition: "all 0.3s ease",
-                    minHeight: 240,
+                    boxShadow: "var(--shadow-sm)", transition: "var(--transition)",
+                    minHeight: 200,
                   }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.1)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.06)"; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "var(--shadow-lg)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "var(--shadow-sm)"; }}
                   >
-                    <div style={{ width: 60, height: 60, borderRadius: "50%", background: "#FCF7E8", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 12 }}>
-                      <Icon size={26} color={color} />
+                    <div style={{ width: 48, height: 48, borderRadius: "50%", background: "var(--cream)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
+                      <Icon size={22} color={color} />
                     </div>
-                    <span style={{ fontSize: 14, fontWeight: 700, color: "var(--red)", marginBottom: 6 }}>{String(i + 1).padStart(2, "0")}</span>
-                    <h3 style={{ margin: "0 0 6px", fontSize: 14, fontWeight: 700, lineHeight: 1.3 }}>{step.title}</h3>
-                    <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>{step.desc}</p>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: "var(--red)", marginBottom: 4 }}>{String(i + 1).padStart(2, "0")}</span>
+                    <h3 style={{ margin: "0 0 4px", fontSize: 13, fontWeight: 700, lineHeight: 1.3 }}>{step.title}</h3>
+                    <p style={{ fontSize: 11, color: "var(--text-muted)", margin: 0, lineHeight: 1.45 }}>{step.desc}</p>
                   </div>
                 );
               })}
@@ -106,103 +107,201 @@ export default function Manufacturing() {
           .timeline-dashed-line {
             display: block;
             position: absolute;
-            top: 56px;
-            left: 80px;
-            right: 80px;
+            top: 44px;
+            left: 10%;
+            right: 10%;
             border-top: 3px dashed var(--red);
             z-index: 1;
           }
         }
       `}</style>
 
-      <div style={{ background: "#f7f2eb", padding: "60px 0" }}>
-        <div className="container about-story-grid">
-          <div className="quality-image">
-            <img
-              src={encodeURI(facilitySec.image || "/images/manufacturingquality.png")}
-              alt="Inside R&R manufacturing facility"
-              style={{ width: "100%", borderRadius: 18 }}
-            />
-          </div>
-          <div>
-            <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 6 }}>{facilitySec.tag || "INSIDE OUR FACILITY"}</p>
-            <h2 style={{ marginTop: 0 }}>{facilitySec.heading || "Built for Quality, Designed for Scale"}</h2>
-            <p style={{ lineHeight: 1.7, color: "var(--text-muted)" }}>
-              {facilitySec.body || "Our modern manufacturing unit in Bhairahawa combines traditional Nepali recipes with advanced technology to deliver snacks that taste authentic and meet the highest quality standards."}
-            </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 20 }}>
-              {facilityFeatures.map((item) => (
-                <div
-                  key={item.title}
-                  style={{
-                    background: "#fff", borderRadius: 12, padding: "16px",
-                    display: "flex", alignItems: "flex-start", gap: 10,
-                    border: "1px solid var(--border-color)",
-                  }}
-                >
-                  <span
+      {/* ── Inside Our Facility ── */}
+      <section style={{ background: "var(--cream)", padding: "40px 0" }}>
+        <div className="container">
+          <div className="facility-grid">
+            <div>
+              <img
+                src={encodeURI(facilitySec.image || "/images/manufacturingquality.png")}
+                alt="Manufacturing Facility"
+                loading="lazy"
+                decoding="async"
+                style={{ width: "100%", height: 400, objectFit: "cover", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
+              />
+            </div>
+            <div>
+              <span style={{ letterSpacing: 2, color: "var(--red)", fontSize: 12, fontWeight: 700, textTransform: "uppercase" }}>
+                {facilitySec.tag || "INSIDE OUR FACILITY"}
+              </span>
+              <h2 style={{ marginTop: 6, fontSize: "clamp(22px, 2.5vw, 34px)", fontWeight: 700, lineHeight: 1.15, color: "var(--text-dark)" }}>
+                {facilitySec.heading || "Clean. Safe. Advanced."}
+              </h2>
+              <p style={{ marginTop: 10, maxWidth: 700, fontSize: "clamp(13px, 1.2vw, 16px)", lineHeight: 1.7, color: "var(--text-muted)" }}>
+                {facilitySec.body || "Our state-of-the-art manufacturing unit is designed to maintain the highest standards of hygiene, safety and efficiency."}
+              </p>
+              <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+                {(facilityFeatures.length > 4 ? facilityFeatures : [
+                  { title: "SS Food Grade Machinery", desc: "Modern machines that ensure precision and hygiene" },
+                  { title: "Hygienic and Safe Environment", desc: "Regular sanitation and strict cleanliness protocols." },
+                  { title: "Trained & Certified Staff", desc: "Our team follows global food safety practices." },
+                  { title: "Quality at Every Step", desc: "Multiple quality checks to deliver nothing but the best." },
+                ]).map((item) => (
+                  <div
+                    key={item.title}
                     style={{
-                      width: 36, height: 36, borderRadius: 10,
-                      background: "var(--cream)", color: "var(--red)",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      flexShrink: 0, fontSize: 16,
+                      background: "#fff", border: "1px solid var(--border-color)", borderRadius: 10,
+                      padding: "12px 16px", display: "flex", alignItems: "center", gap: 14,
+                      transition: "var(--transition)",
                     }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "var(--shadow-sm)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
                   >
-                    <FaIndustry />
-                  </span>
-                  <div>
-                    <strong style={{ fontSize: 14, display: "block" }}>{item.title}</strong>
-                    <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{item.desc}</span>
+                    <div style={{ width: 40, height: 40, borderRadius: "50%", background: "var(--cream)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <Check size={20} strokeWidth={2.6} style={{ color: "var(--red)" }} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: "var(--text-dark)" }}>{item.title}</h3>
+                      <p style={{ marginTop: 2, fontSize: 12, lineHeight: 1.5, color: "var(--text-muted)", marginBottom: 0 }}>{item.desc}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", padding: "48px 0" }}>
-        <div className="container" style={{ textAlign: "center" }}>
-          <h2 style={{ marginTop: 0, fontSize: "clamp(24px, 3vw, 36px)", color: "#fff", fontWeight: 700 }}>{ctaSec.heading || "Interested in Bulk Orders?"}</h2>
-          <p style={{ maxWidth: 480, margin: "0 auto 20px", opacity: 0.9, fontSize: 15, color: "#fff" }}>
-            {ctaSec.body || "We offer competitive pricing for retailers and distributors across Nepal."}
-          </p>
-          <div style={{ display: "flex", gap: 14, justifyContent: "center", marginBottom: 18, flexWrap: "wrap" }}>
-            <Link to="/contact" className="btn btn-white">
-              <FiShoppingBag /> {ctaSec.button1Text || "Become a Distributor"}
-            </Link>
-            <a
-              href={`https://wa.me/${whatsAppNumber}`}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-whatsapp"
-            >
-              <FiMessageCircle /> {ctaSec.button2Text || "Chat on WhatsApp"}
-            </a>
-          </div>
-          <div style={{ display: "flex", gap: 14, justifyContent: "center", fontSize: 13, flexWrap: "wrap" }}>
-            {(ctaSec.badges || ["Nationwide Delivery", "FSSAI Certified", "Consistent Quality"]).map((badge) => (
-              <span key={badge} style={{ display: "flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.2)", padding: "6px 14px", borderRadius: 999 }}>
-                {badge}
-              </span>
-            ))}
+      {/* ── Why Choose Us ── */}
+      <section style={{ background: "var(--gray-bg)", padding: "40px 0" }}>
+        <div className="container">
+          <div className="why-choose-grid">
+            <div style={{ background: "var(--dark)", borderRadius: 16, padding: "32px 24px", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", color: "#fff" }}>
+              <div style={{ margin: "0 auto", width: 64, height: 64, borderRadius: "50%", background: "#474747", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <ShieldCheck size={30} strokeWidth={2} style={{ color: "var(--gold)" }} />
+              </div>
+              <h3 style={{ marginTop: 16, fontSize: 20, fontWeight: 700, color: "#fff" }}>Quality Assured</h3>
+              <p style={{ marginTop: 12, fontSize: 14, lineHeight: 1.7, color: "#d1d5db" }}>
+                Manufactured in our state-of-the-art ISO certified facility. We adhere to the highest standards of food safety and hygiene to ensure every pack delivers premium quality.
+              </p>
+            </div>
+            <div style={{ background: "#fff", borderRadius: 16, boxShadow: "var(--shadow-sm)", padding: "28px 32px" }}>
+              <h2 style={{ marginTop: 0, fontSize: "clamp(20px, 2.2vw, 28px)", fontWeight: 700, color: "var(--text-dark)" }}>Why You'll Love It</h2>
+              <div className="why-choose-benefits">
+                {[
+                  { icon: Star, title: "Authentic Flavor", desc: "Crafted with care using time-tested flavor profiles.", bg: "#FFF4D9", color: "#F4B400" },
+                  { icon: Clock3, title: "Handmade Touch", desc: "Each item is carefully handcrafted for unique character.", bg: "#FFE8E1", color: "#FF6A3D" },
+                  { icon: Leaf, title: "Fresh Ingredients", desc: "Sourced locally to ensure peak freshness and quality.", bg: "#DDF7E3", color: "#18A44C" },
+                  { icon: Shield, title: "Sustainable Practices", desc: "Committed to eco-friendly methods throughout production.", bg: "#FFDCDC", color: "#E53935" },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                      <div style={{ width: 48, height: 48, borderRadius: "50%", background: item.bg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                        <Icon size={22} style={{ color: item.color }} />
+                      </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <h3 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: "var(--text-dark)", lineHeight: 1.35, overflowWrap: "break-word" }}>{item.title}</h3>
+                        <p style={{ marginTop: 4, fontSize: 12, lineHeight: 1.5, color: "var(--text-muted)", overflowWrap: "break-word", marginBottom: 0 }}>{item.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 6 }}>{capSec.tag || "OUR CAPABILITIES"}</p>
-          <h2 style={{ marginTop: 0 }}>{capSec.heading || "Why Our Manufacturing Stands Out"}</h2>
+      {/* ── CTA Banner ── */}
+      <section style={{ padding: "40px 24px", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
+        <div style={{ maxWidth: 1380, margin: "0 auto" }}>
+          <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, minHeight: 380, boxShadow: "0 30px 80px rgba(0,0,0,0.18)" }}>
+            <img
+              src={encodeURI(ctaSec.image || "/images/manufacturinghero.png")}
+              alt="Banner"
+              loading="lazy"
+              decoding="async"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)" }} />
+            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 380, padding: "32px 24px" }}>
+              <h2 style={{ maxWidth: 960, color: "#fff", fontWeight: 700, fontSize: "clamp(20px, 2.5vw, 36px)", lineHeight: 1.2, marginTop: 0 }}>
+                {ctaSec.heading || "The Ultimate Crunchy Chips Experience"}
+              </h2>
+              <p style={{ marginTop: 12, maxWidth: 700, fontSize: "clamp(13px, 1.2vw, 16px)", lineHeight: 1.7, color: "rgba(255,255,255,0.95)" }}>
+                {ctaSec.body || "Discover our best-selling instant chips crafted with premium ingredients, bold flavours and unbeatable crunch that everyone loves."}
+              </p>
+              <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12 }}>
+                <Link
+                  to={ctaSec.button1Link || "/products"}
+                  style={{
+                    height: 44, paddingInline: 24, borderRadius: 999,
+                    background: "var(--red)", color: "#fff", fontSize: 14, fontWeight: 600,
+                    display: "flex", alignItems: "center", gap: 8, textDecoration: "none",
+                    transition: "var(--transition)", border: "none", cursor: "pointer",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "var(--red-dark)"; e.currentTarget.style.transform = "scale(1.05)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "var(--red)"; e.currentTarget.style.transform = "scale(1)"; }}
+                >
+                  {ctaSec.button1Text || "View Collection"} <ArrowRight size={18} />
+                </Link>
+                <Link
+                  to={ctaSec.button2Link || "/contact"}
+                  style={{
+                    height: 44, paddingInline: 24, borderRadius: 999,
+                    background: "var(--green)", color: "#fff", fontSize: 14, fontWeight: 600,
+                    display: "flex", alignItems: "center", gap: 8, textDecoration: "none",
+                    transition: "var(--transition)",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#21BF5B"; e.currentTarget.style.transform = "scale(1.05)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "var(--green)"; e.currentTarget.style.transform = "scale(1)"; }}
+                >
+                  {ctaSec.button2Text || "Become a Distributor"} <ArrowRight size={18} />
+                </Link>
+              </div>
+              <div style={{ width: "100%", maxWidth: 800, marginTop: 24 }}>
+                <div style={{ borderTop: "1px solid rgba(255,255,255,0.2)" }} />
+                <div style={{ marginTop: 16, display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 16 }}>
+                  {(ctaSec.badges || ["Free Delivery", "Premium Quality", "Authentic Taste"]).map((badge, i) => {
+                    const icons = [<Truck size={18} />, <BadgeCheck size={18} />, <Award size={18} />];
+                    return (
+                      <div
+                        key={badge}
+                        style={{
+                          height: 36, paddingInline: 18, borderRadius: 999,
+                          border: "1px solid rgba(255,255,255,0.4)", background: "rgba(255,255,255,0.1)",
+                          backdropFilter: "blur(12px)", display: "flex", alignItems: "center", gap: 6, color: "#fff",
+                        }}
+                      >
+                        {icons[i] || <Truck size={16} />}
+                        <span style={{ fontSize: 13, fontWeight: 500 }}>{badge}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Our Capabilities ── */}
+      <div className="container" style={{ paddingTop: 40, paddingBottom: 40 }}>
+        <div style={{ textAlign: "center", marginBottom: 24 }}>
+          <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 4 }}>{capSec.tag || "OUR CAPABILITIES"}</p>
+          <h2 style={{ marginTop: 0, fontSize: "clamp(20px, 2.5vw, 32px)" }}>{capSec.heading || "Why Our Manufacturing Stands Out"}</h2>
         </div>
         <div className="manufacturing-why-grid">
           {capabilities.map((item) => (
-            <div key={item.title} style={{ background: "#fff", borderRadius: 12, padding: 24, textAlign: "center", border: "1px solid var(--border-color)" }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: "var(--cream)", color: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", fontSize: 20 }}>
+            <div key={item.title} style={{ background: "#fff", borderRadius: 10, padding: 18, textAlign: "center", border: "1px solid var(--border-color)", boxShadow: "var(--shadow-sm)", transition: "var(--transition)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "var(--shadow-md)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "var(--shadow-sm)"; }}
+            >
+              <div style={{ width: 40, height: 40, borderRadius: 10, background: "var(--cream)", color: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 18 }}>
                 <FaIndustry />
               </div>
-              <h4 style={{ margin: "0 0 6px" }}>{item.title}</h4>
-              <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0, lineHeight: 1.6 }}>{item.desc}</p>
+              <h4 style={{ margin: "0 0 4px", fontSize: 14 }}>{item.title}</h4>
+              <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>{item.desc}</p>
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiShoppingBag, FiMessageCircle, FiArrowRight, FiCheck, FiStar, FiZap, FiHeart } from "react-icons/fi";
-import { FaStar, FaMedal, FaBuilding, FaShieldAlt, FaUsers, FaTruck, FaPlay, FaHome, FaAward, FaHandshake, FaClock, FaGlobeAsia } from "react-icons/fa";
+import { FaStar, FaMedal, FaBuilding, FaShieldAlt, FaUsers, FaTruck, FaPlay, FaHome, FaAward, FaHandshake, FaClock, FaGlobeAsia, FaStore, FaBoxes, FaMapMarkerAlt } from "react-icons/fa";
 import ProductCard from "../components/ProductCard";
 import { useCatalog } from "../context/CatalogContext";
 import Seo from "../components/Seo";
@@ -32,8 +32,8 @@ export default function Home() {
   const whatsAppNumber = settings?.whatsappNumber || "9779820299711";
   const defaultStats = [
     ["500+", "Happy Retailers", "var(--red)"],
-    ["10+", "Product Lines", "var(--gold)"],
-    ["77", "Districts", "#fff"],
+    ["10+", "Product Lines", "var(--red)"],
+    ["77", "Districts", "var(--red)"],
   ];
   const heroStats = hero.stats || null;
 
@@ -66,11 +66,13 @@ export default function Home() {
           </div>
           <div className="home-hero__stats">
             {(heroStats || defaultStats).map((s, i, arr) => {
-              const val = heroStats ? [s.value, s.label, ["var(--red)", "var(--gold)", "#fff"][i] || "var(--red)"] : s;
+              const val = heroStats ? [s.value, s.label] : s;
+              const statIcons = [<FaStore size={16} />, <FaBoxes size={16} />, <FaMapMarkerAlt size={16} />];
               return (
                 <React.Fragment key={val[1]}>
                   <div className="home-hero__stat">
-                    <span className="home-hero__stat-num" style={{ color: val[2] }}>{val[0]}</span>
+                    {statIcons[i]}
+                    <span className="home-hero__stat-num" style={{ color: "#d32f2f" }}>{val[0]}</span>
                     <span className="home-hero__stat-label">{val[1]}</span>
                   </div>
                   {i < arr.length - 1 && <div className="home-hero__stat-divider" />}
@@ -91,13 +93,13 @@ export default function Home() {
           const alts = ["", "Kushal Namkeen", "Makai Diet", "Cheese Balls", "Aone Chips Green"];
           return i === 0 ? (
             <div key={i} className={`hero-slideshow-slide ${classes[i] || ""}`}>
-              <img src={encodeURI(slide)} alt="" />
+              <img src={encodeURI(slide)} alt="" decoding="async" />
               <div className="hero-slide-overlay" />
             </div>
           ) : (
             <div key={i} className={`hero-slideshow-slide ${classes[i] || ""}`}>
               <div className="hero-slide-product">
-                <img src={encodeURI(slide)} alt={alts[i] || ""} />
+                <img src={encodeURI(slide)} alt={alts[i] || ""} loading="lazy" decoding="async" />
               </div>
             </div>
           );
@@ -126,30 +128,24 @@ export default function Home() {
 
       <section style={{ background: "#fff", padding: "60px 0" }}>
         <div className="container about-story-grid" style={{ alignItems: "stretch" }}>
-          <div style={{ height: "100%", minHeight: 400 }}>
+          <div style={{ height: "100%" }}>
             <img
               src={encodeURI(storySec.image || "/images/home page below new arrivals.png")}
               alt="R&R production facility"
-              style={{ borderRadius: 16, width: "100%", height: "100%", minHeight: 400, objectFit: "cover" }}
+              loading="lazy"
+              decoding="async"
+              style={{ borderRadius: 16, width: "100%", height: "100%", objectFit: "cover" }}
             />
           </div>
-          <div>
-            <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 6 }}>
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "8px 0" }}>
+            <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 4, fontSize: 13 }}>
               {storySec.tag || "HEALTHY LIVING"}
             </p>
-            <h2 style={{ marginTop: 0 }}>{storySec.heading || "Nepal's Most Trusted Snack Brand"}</h2>
-            {(storySec.body || [
-              "With over a decade of experience, Riya & Rakshya Food Products has grown from a small kitchen in Bhairahawa to one of Nepal's leading snack manufacturers. Our commitment to quality, taste, and innovation has earned the trust of thousands of customers across all 77 districts.",
-              "Every product is crafted using the finest ingredients, prepared in a hygienic facility, and tested to meet the highest quality standards before reaching your hands.",
-            ]).map((para, i) => (
-              <p key={i} style={{ lineHeight: 1.7, color: "var(--text-muted)" }}>{para}</p>
-            ))}
-            <p style={{ lineHeight: 1.7, color: "var(--text-muted)" }}>
-              Also known as <strong>RNR Food Products</strong>, <strong>R&R Food Products</strong> and{" "}
-              <strong>Riya and Rakshya Food Products</strong>, we are a trusted name for authentic Nepali
-              snacks, namkeen, dalmot, chips and instant noodles across Nepal.
+            <h2 style={{ marginTop: 0, fontSize: "clamp(22px, 2.5vw, 32px)" }}>{storySec.heading || "Nepal's Most Trusted Snack Brand"}</h2>
+            <p style={{ lineHeight: 1.6, color: "var(--text-muted)", fontSize: 15, marginBottom: 12 }}>
+              {storySec.body?.[0] || "Crafted with care using premium ingredients in our state-of-the-art facility."}
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
               {(storySec.features || [
                 { title: "100% Vegetarian", desc: "Pure vegetarian snacks" },
                 { title: "Premium Quality", desc: "Best raw materials" },
@@ -162,34 +158,33 @@ export default function Home() {
                     key={item.title}
                     style={{
                       background: "#fff",
-                      borderRadius: 12,
-                      padding: "16px",
+                      borderRadius: 10,
+                      padding: "10px 12px",
                       display: "flex",
-                      alignItems: "flex-start",
-                      gap: 10,
+                      alignItems: "center",
+                      gap: 8,
                       border: "1px solid var(--border-color)",
                     }}
                   >
                     <span
                       style={{
-                        width: 36, height: 36, borderRadius: 10,
+                        width: 28, height: 28, borderRadius: 6,
                         background: "var(--cream)", color: "var(--red)",
                         display: "flex", alignItems: "center", justifyContent: "center",
-                        flexShrink: 0, fontSize: 16,
+                        flexShrink: 0, fontSize: 12,
                       }}
                     >
                       {icons[i] || <FiCheck />}
                     </span>
                     <div>
-                      <strong style={{ fontSize: 14, display: "block" }}>{item.title}</strong>
-                      <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{item.desc}</span>
+                      <strong style={{ fontSize: 12, display: "block", lineHeight: 1.3 }}>{item.title}</strong>
                     </div>
                   </div>
                 );
               })}
             </div>
-            <Link to="/about" className="btn btn-red" style={{ marginTop: 24 }}>
-              {storySec.ctaText || "Learn more about us"} <FiArrowRight />
+            <Link to="/about" className="btn btn-red" style={{ marginTop: 12, alignSelf: "flex-start", padding: "8px 18px", fontSize: 13 }}>
+              {storySec.ctaText || "Learn more about us"} <FiArrowRight size={14} />
             </Link>
           </div>
         </div>
@@ -226,18 +221,21 @@ export default function Home() {
             { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
             { title: "Happy", desc: "Customers", icon: <FaUsers /> },
             { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
+            { title: "Trusted", desc: "Brand Partner", icon: <FaHandshake /> },
           ]), ...(perksData.length ? perksData : [
             { title: "10+", desc: "Years Of Experience", icon: <FaClock /> },
             { title: "Modern", desc: "Manufacturing Unit", icon: <FaBuilding /> },
             { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
             { title: "Happy", desc: "Customers", icon: <FaUsers /> },
             { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
+            { title: "Trusted", desc: "Brand Partner", icon: <FaHandshake /> },
           ]), ...(perksData.length ? perksData : [
             { title: "10+", desc: "Years Of Experience", icon: <FaClock /> },
             { title: "Modern", desc: "Manufacturing Unit", icon: <FaBuilding /> },
             { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
             { title: "Happy", desc: "Customers", icon: <FaUsers /> },
             { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
+            { title: "Trusted", desc: "Brand Partner", icon: <FaHandshake /> },
           ])].map((perk, i) => (
             <div key={`${perk.desc}-${i}`} className="perk-item">
               <div className="perk-icon">
@@ -258,6 +256,8 @@ export default function Home() {
             <img
               src={encodeURI(aboutStorySec.image || "/images/abouthome.png")}
               alt="The R&R Story"
+              loading="lazy"
+              decoding="async"
               style={{ borderRadius: 16, width: "100%", objectFit: "contain", maxHeight: 500 }}
             />
           </div>
