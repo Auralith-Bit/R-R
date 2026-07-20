@@ -1718,23 +1718,45 @@ select:focus {
 .footer-grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr 1.2fr auto;
-  gap: 30px;
+  gap: 32px;
   align-items: start;
 }
 .footer-grid h4 {
   color: var(--gold);
-  margin: 0 0 16px;
+  margin: 0 0 14px;
   font-size: 15px;
+  font-weight: 700;
   letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.footer-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .footer-grid li {
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  font-size: 13px;
   transition: color var(--transition);
+}
+.footer-grid li a {
+  color: #aaa;
+  transition: color var(--transition), padding-left var(--transition);
 }
 .footer-grid li a:hover {
   color: #fff;
   padding-left: 4px;
+}
+.footer-categories-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-categories-list li {
+  margin: 0;
 }
 .footer-social {
   display: flex;
@@ -1758,12 +1780,12 @@ select:focus {
   transform: translateY(-2px);
 }
 .subscribe-box {
-  background: #262626;
-  border-radius: 10px;
-  padding: 14px;
+  background: #222;
+  border-radius: 12px;
+  padding: 18px;
   border: 1px solid #333;
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
+  max-width: 280px;
 }
 .subscribe-box h4 {
   font-size: 14px;

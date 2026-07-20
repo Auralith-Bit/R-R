@@ -4,7 +4,7 @@ import { FiFacebook, FiInstagram, FiTwitter, FiArrowRight } from "react-icons/fi
 import { useCatalog } from "../context/CatalogContext";
 
 export default function Footer() {
-  const { categories, settings, pages } = useCatalog();
+  const { categories, categoryGroups, settings, pages } = useCatalog();
   const footerData = (pages.shared || {}).footer || {};
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
@@ -55,15 +55,13 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="footer-categories">
           <h4>Categories</h4>
-          <ul>
-            {categories.map((c) => (
-              <li key={c}>
-                <Link
-                  to={c === "All Products" ? "/products" : `/products?category=${encodeURIComponent(c)}`}
-                >
-                  {c}
+          <ul className="footer-categories-list">
+            {categoryGroups.filter((g) => g.label !== "All Products").map((g) => (
+              <li key={g.label}>
+                <Link to={`/products?category=${encodeURIComponent(g.label)}`}>
+                  {g.label}
                 </Link>
               </li>
             ))}
@@ -80,11 +78,14 @@ export default function Footer() {
         </div>
 
         <div className="subscribe-box">
-          <h4 style={{ marginBottom: 2, fontSize: 14 }}>{footerData.subscribeHeading || "Subscribe"}</h4>
+          <h4 style={{ marginBottom: 2, fontSize: 14 }}>{footerData.subscribeHeading || "Stay in the Loop"}</h4>
+          <p style={{ fontSize: 12, lineHeight: 1.5, margin: "0 0 10px", color: "#aaa" }}>
+            Be the first to know about new product launches, exclusive deals and festive offers.
+          </p>
           <form className="subscribe-form" onSubmit={handleSubscribe}>
             <input
               type="email"
-              placeholder="Email address"
+              placeholder="Enter your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -94,12 +95,12 @@ export default function Footer() {
             </button>
           </form>
           {subscribed ? (
-            <p style={{ fontSize: 12, color: "var(--gold)", margin: 0 }}>
-              Thanks for subscribing!
+            <p style={{ fontSize: 12, color: "var(--gold)", margin: "8px 0 0" }}>
+              Thanks for subscribing! Stay tuned for exciting updates.
             </p>
           ) : (
-            <p style={{ fontSize: 11, lineHeight: 1.4, margin: 0, color: "#888" }}>
-              {footerData.subscribeDescription || "Get the latest snack drops and offers straight to your inbox."}
+            <p style={{ fontSize: 11, lineHeight: 1.4, margin: "8px 0 0", color: "#888" }}>
+              {footerData.subscribeDescription || "Join thousands of snack lovers who get early access to new flavors, special discounts and behind-the-scenes updates from R&R Food Products."}
             </p>
           )}
         </div>
