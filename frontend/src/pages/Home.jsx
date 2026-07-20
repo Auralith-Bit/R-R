@@ -67,11 +67,9 @@ export default function Home() {
           <div className="home-hero__stats">
             {(heroStats || defaultStats).map((s, i, arr) => {
               const val = heroStats ? [s.value, s.label] : s;
-              const statIcons = [<FaStore size={16} />, <FaBoxes size={16} />, <FaMapMarkerAlt size={16} />];
               return (
                 <React.Fragment key={val[1]}>
                   <div className="home-hero__stat">
-                    {statIcons[i]}
                     <span className="home-hero__stat-num" style={{ color: "#d32f2f" }}>{val[0]}</span>
                     <span className="home-hero__stat-label">{val[1]}</span>
                   </div>
@@ -126,7 +124,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{ background: "#fff", padding: "60px 0" }}>
+      <section style={{ background: "#FDF5F5", padding: "60px 0" }}>
         <div className="container about-story-grid" style={{ alignItems: "stretch" }}>
           <div style={{ height: "100%" }}>
             <img
@@ -141,16 +139,16 @@ export default function Home() {
             <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 4, fontSize: 13 }}>
               {storySec.tag || "HEALTHY LIVING"}
             </p>
-            <h2 style={{ marginTop: 0, fontSize: "clamp(22px, 2.5vw, 32px)" }}>{storySec.heading || "Nepal's Most Trusted Snack Brand"}</h2>
-            <p style={{ lineHeight: 1.6, color: "var(--text-muted)", fontSize: 15, marginBottom: 12 }}>
+            <h2 style={{ marginTop: 0, marginBottom: 4, fontSize: "clamp(22px, 2.5vw, 32px)" }}>{storySec.heading || "Nepal's Most Trusted Snack Brand"}</h2>
+            <p style={{ lineHeight: 1.6, color: "var(--text-muted)", fontSize: 15, marginBottom: 12, marginTop: 0 }}>
               {storySec.body?.[0] || "Crafted with care using premium ingredients in our state-of-the-art facility."}
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
               {(storySec.features || [
-                { title: "100% Vegetarian", desc: "Pure vegetarian snacks" },
-                { title: "Premium Quality", desc: "Best raw materials" },
-                { title: "Fast Delivery", desc: "Quick nationwide shipping" },
-                { title: "Trusted Brand", desc: "Loved by thousands" },
+                { title: "100% Vegetarian", desc: "Every product is made with plant-based ingredients, making it a guilt-free choice for all ages." },
+                { title: "Premium Quality", desc: "We use only the finest raw materials, carefully sourced and tested to ensure authentic taste in every bite." },
+                { title: "Fast Delivery", desc: "Our nationwide logistics network ensures your favorite snacks reach you fresh and on time, every time." },
+                { title: "Trusted Brand", desc: "Backed by over 500+ happy retailers and loved by families across all 77 districts of Nepal." },
               ]).map((item, i) => {
                 const icons = [<FiCheck />, <FiStar />, <FiZap />, <FiHeart />];
                 return (
@@ -158,32 +156,31 @@ export default function Home() {
                     key={item.title}
                     style={{
                       background: "#fff",
-                      borderRadius: 10,
-                      padding: "10px 12px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 8,
+                      borderRadius: 12,
+                      padding: "16px",
                       border: "1px solid var(--border-color)",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
                     }}
                   >
-                    <span
-                      style={{
-                        width: 28, height: 28, borderRadius: 6,
-                        background: "var(--cream)", color: "var(--red)",
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        flexShrink: 0, fontSize: 12,
-                      }}
-                    >
-                      {icons[i] || <FiCheck />}
-                    </span>
-                    <div>
-                      <strong style={{ fontSize: 12, display: "block", lineHeight: 1.3 }}>{item.title}</strong>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                      <span
+                        style={{
+                          width: 32, height: 32, borderRadius: 8,
+                          background: "var(--cream)", color: "var(--red)",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          flexShrink: 0, fontSize: 14,
+                        }}
+                      >
+                        {icons[i] || <FiCheck />}
+                      </span>
+                      <strong style={{ fontSize: 13 }}>{item.title}</strong>
                     </div>
+                    <p style={{ margin: 0, fontSize: 12, lineHeight: 1.5, color: "var(--text-muted)" }}>{item.desc}</p>
                   </div>
                 );
               })}
             </div>
-            <Link to="/about" className="btn btn-red" style={{ marginTop: 12, alignSelf: "flex-start", padding: "8px 18px", fontSize: 13 }}>
+            <Link to="/about" className="btn btn-red" style={{ marginTop: 20, alignSelf: "flex-start", padding: "8px 18px", fontSize: 13 }}>
               {storySec.ctaText || "Learn more about us"} <FiArrowRight size={14} />
             </Link>
           </div>
@@ -215,38 +212,30 @@ export default function Home() {
 
       <section className="perks-marquee-section">
         <div className="perks-marquee-track">
-          {[...(perksData.length ? perksData : [
-            { title: "10+", desc: "Years Of Experience", icon: <FaClock /> },
-            { title: "Modern", desc: "Manufacturing Unit", icon: <FaBuilding /> },
-            { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
-            { title: "Happy", desc: "Customers", icon: <FaUsers /> },
-            { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
-            { title: "Trusted", desc: "Brand Partner", icon: <FaHandshake /> },
-          ]), ...(perksData.length ? perksData : [
-            { title: "10+", desc: "Years Of Experience", icon: <FaClock /> },
-            { title: "Modern", desc: "Manufacturing Unit", icon: <FaBuilding /> },
-            { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
-            { title: "Happy", desc: "Customers", icon: <FaUsers /> },
-            { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
-            { title: "Trusted", desc: "Brand Partner", icon: <FaHandshake /> },
-          ]), ...(perksData.length ? perksData : [
-            { title: "10+", desc: "Years Of Experience", icon: <FaClock /> },
-            { title: "Modern", desc: "Manufacturing Unit", icon: <FaBuilding /> },
-            { title: "Best Quality", desc: "Raw Materials", icon: <FaShieldAlt /> },
-            { title: "Happy", desc: "Customers", icon: <FaUsers /> },
-            { title: "Wide", desc: "Distribution Network", icon: <FaGlobeAsia /> },
-            { title: "Trusted", desc: "Brand Partner", icon: <FaHandshake /> },
-          ])].map((perk, i) => (
-            <div key={`${perk.desc}-${i}`} className="perk-item">
-              <div className="perk-icon">
-                {perk.icon || <FaAward />}
+          {(() => {
+            const perkIcons = [<FaTruck />, <FaBoxes />, <FaStore />, <FaMedal />, <FaMapMarkerAlt />, <FaAward />, <FaUsers />, <FaShieldAlt />];
+            const defaults = [
+              { title: "Fast Delivery", desc: "Quick and reliable delivery across all 77 districts of Nepal" },
+              { title: "Wide Product Range", desc: "Over 60 delicious varieties of snacks and namkeen to choose from" },
+              { title: "Trusted By Many", desc: "Partnered with 500+ happy retailers and distributors nationwide" },
+              { title: "Premium Quality", desc: "Made from carefully sourced and tested finest raw materials" },
+              { title: "Nationwide Reach", desc: "Available in every corner of Nepal from hills to terai" },
+              { title: "Award Winning", desc: "Recognized for outstanding taste, quality and innovation" },
+              { title: "Happy Customers", desc: "Thousands of families enjoy our snacks every single day" },
+              { title: "Trusted Brand", desc: "A name synonymous with hygiene, safety and great taste" },
+            ];
+            const items = perksData.length ? perksData : defaults;
+            const tripled = [...items, ...items, ...items];
+            return tripled.map((perk, i) => (
+              <div key={`${perk.title}-${i}`} className="perk-item">
+                <div className="perk-icon">
+                  {perkIcons[i % perkIcons.length]}
+                </div>
+                <h4>{perk.title}</h4>
+                <p>{perk.desc}</p>
               </div>
-              <div>
-                <h4 style={{ marginBottom: 2 }}>{perk.title}</h4>
-                <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0 }}>{perk.desc}</p>
-              </div>
-            </div>
-          ))}
+            ));
+          })()}
         </div>
       </section>
 
@@ -280,7 +269,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", color: "#fff", padding: "48px 0", textAlign: "center", marginTop: 40 }}>
+      <section style={{ background: "#B9181E", color: "#fff", padding: "48px 0", textAlign: "center", marginTop: 40 }}>
         <div className="container">
           <h2 style={{ marginTop: 0, fontSize: "clamp(24px, 3vw, 36px)", color: "#fff" }}>{ctaBanner.heading || "Ready to stock up on Nepal's favorite snacks?"}</h2>
           <p style={{ maxWidth: 560, margin: "0 auto 24px", opacity: 0.9 }}>

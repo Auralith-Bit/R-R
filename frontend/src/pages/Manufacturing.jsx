@@ -107,7 +107,7 @@ export default function Manufacturing() {
           .timeline-dashed-line {
             display: block;
             position: absolute;
-            top: 44px;
+            top: 50%;
             left: 10%;
             right: 10%;
             border-top: 3px dashed var(--red);
@@ -117,7 +117,7 @@ export default function Manufacturing() {
       `}</style>
 
       {/* ── Inside Our Facility ── */}
-      <section style={{ background: "var(--cream)", padding: "40px 0" }}>
+      <section style={{ background: "#FDF5F5", padding: "40px 0" }}>
         <div className="container">
           <div className="facility-grid">
             <div>
@@ -126,7 +126,7 @@ export default function Manufacturing() {
                 alt="Manufacturing Facility"
                 loading="lazy"
                 decoding="async"
-                style={{ width: "100%", height: 400, objectFit: "cover", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
+                style={{ width: "100%", height: 480, objectFit: "cover", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
               />
             </div>
             <div>
@@ -217,14 +217,14 @@ export default function Manufacturing() {
         <div style={{ maxWidth: 1380, margin: "0 auto" }}>
           <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, minHeight: 380, boxShadow: "0 30px 80px rgba(0,0,0,0.18)" }}>
             <img
-              src={encodeURI(ctaSec.image || "/images/manufacturinghero.png")}
+              src={encodeURI(ctaSec.image || "/images/hero/kushal namkeen backgraound CTA.png")}
               alt="Banner"
               loading="lazy"
               decoding="async"
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
             />
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)" }} />
-            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 380, padding: "32px 24px" }}>
+            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 380, padding: "32px 12px" }}>
               <h2 style={{ maxWidth: 960, color: "#fff", fontWeight: 700, fontSize: "clamp(20px, 2.5vw, 36px)", lineHeight: 1.2, marginTop: 0 }}>
                 {ctaSec.heading || "The Ultimate Crunchy Chips Experience"}
               </h2>

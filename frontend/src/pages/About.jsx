@@ -199,9 +199,9 @@ export default function About() {
             ]).map((s) => {
               const [num, label] = Array.isArray(s) ? s : [s.value, s.label];
               return (
-                <div key={label} style={{ background: "#262626", borderRadius: 12, padding: "16px 10px", textAlign: "center" }}>
+                <div key={label} style={{ background: "rgba(255,255,255,0.12)", borderRadius: 12, padding: "16px 10px", textAlign: "center" }}>
                   <div style={{ fontSize: 26, fontWeight: 800, color: "var(--gold)" }}>{num}</div>
-                  <div style={{ fontSize: 12, color: "#fff", opacity: 0.9 }}>{label}</div>
+                  <div style={{ fontSize: 12, color: "#FFFFFF" }}>{label}</div>
                 </div>
               );
             })}

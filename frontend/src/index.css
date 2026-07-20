@@ -27,6 +27,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 html,
@@ -49,7 +50,6 @@ body {
 
 #root {
   max-width: 100vw;
-  overflow-x: hidden;
 }
 
 a {
@@ -778,58 +778,80 @@ select:focus {
 }
 .perk-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 14px;
-  text-align: left;
+  text-align: center;
   flex-shrink: 0;
 }
 .perk-icon {
   flex-shrink: 0;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(211, 47, 47, 0.1);
-  color: var(--red);
+  background: var(--red);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  transition: all var(--transition);
-}
-.perk-item:hover .perk-icon {
-  background: var(--red);
-  color: #fff;
-  transform: scale(1.1);
+  transition: all 0.3s ease;
 }
 
 /* Perks marquee — rotates continuously above CTA */
 .perks-marquee-section {
   overflow: hidden;
-  background: var(--cream);
-  padding: 36px clamp(20px, 4vw, 64px);
+  background: linear-gradient(135deg, #fdf6d0 0%, #fef9e7 50%, #fdf6d0 100%);
+  padding: 48px clamp(20px, 4vw, 64px);
   border-top: 1px solid #eee4b8;
   border-bottom: 1px solid #eee4b8;
 }
 .perks-marquee-track {
   display: flex;
-  gap: 80px;
+  gap: 50px;
   width: max-content;
-  animation: perksScroll 12s linear infinite;
+  animation: perksScroll 5s linear infinite;
 }
 .perks-marquee-track:hover {
   animation-play-state: paused;
 }
-.perk-item .perk-icon {
+.perk-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   flex-shrink: 0;
-  width: 42px;
-  height: 42px;
+  min-width: 160px;
+  max-width: 180px;
+}
+.perk-icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: rgba(211, 47, 47, 0.1);
-  color: var(--red);
+  background: var(--red);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 24px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+.perk-item:hover .perk-icon {
+  background: var(--red-dark);
+  transform: scale(1.1);
+}
+.perk-item h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 6px;
+}
+.perk-item p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
 }
 @keyframes perksScroll {
   0% { transform: translateX(0); }
