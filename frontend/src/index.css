@@ -27,7 +27,6 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  overflow-x: hidden;
 }
 
 html,
@@ -49,7 +48,7 @@ body {
 }
 
 #root {
-  max-width: 100vw;
+  max-width: 100%;
 }
 
 a {
@@ -359,7 +358,7 @@ select:focus {
 .page-hero-v2 {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 440px;
   overflow: hidden;
   isolation: isolate;
   display: flex;
@@ -456,10 +455,15 @@ select:focus {
 }
 @media (max-width: 720px) {
   .page-hero-v2 {
-    height: 280px;
+    height: 300px;
   }
   .page-hero-v2-copy h1 {
     font-size: 28px;
+  }
+}
+@media (min-width: 1400px) {
+  .page-hero-v2 {
+    height: 500px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1685,9 +1689,9 @@ select:focus {
   padding-top: 40px;
   padding-bottom: 40px;
   display: grid;
-  grid-template-columns: 0.8fr 1.6fr;
-  gap: 24px;
-  align-items: start;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 28px;
+  align-items: stretch;
 }
 .contact-form-row {
   display: grid;

@@ -131,27 +131,27 @@ export default function Contact() {
       </div>
 
       <div className="container contact-main-grid" style={{ paddingTop: 48, paddingBottom: 48 }}>
-        <div>
-          <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", color: "#fff", borderRadius: 14, padding: 22 }}>
-            <h3 style={{ marginTop: 0, fontSize: 18, marginBottom: 10, fontWeight: 700 }}>{contactInfo.heading || "Get in Touch"}</h3>
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+          <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", color: "#fff", borderRadius: 14, padding: 32, flex: 1 }}>
+            <h3 style={{ marginTop: 0, fontSize: 22, marginBottom: 14, fontWeight: 700 }}>{contactInfo.heading || "Get in Touch"}</h3>
             {contactItems.map((item, i) => {
               const Icon = CONTACT_ICONS[i] || FiPhone;
               return (
-                <div key={i} style={{ display: "flex", gap: 10, padding: "9px 0", borderTop: i === 0 ? "none" : "1px solid rgba(255,255,255,0.25)" }}>
-                  <Icon size={17} style={{ marginTop: 2 }} />
+                <div key={i} style={{ display: "flex", gap: 12, padding: "13px 0", borderTop: i === 0 ? "none" : "1px solid rgba(255,255,255,0.25)" }}>
+                  <Icon size={20} style={{ marginTop: 2 }} />
                   <div>
-                    <strong style={{ display: "block", fontSize: 13, fontWeight: 700 }}>{item.label}:</strong>
-                    <span style={{ fontSize: 12, opacity: 1, fontWeight: 500 }}>{item.value}</span>
+                    <strong style={{ display: "block", fontSize: 15, fontWeight: 700 }}>{item.label}:</strong>
+                    <span style={{ fontSize: 14, opacity: 1, fontWeight: 500 }}>{item.value}</span>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          <div style={{ background: "#d9f2e3", borderRadius: 14, padding: 16, marginTop: 14, textAlign: "center" }}>
-            <FiMessageCircle size={22} color="#1b6f3c" />
-            <h4 style={{ margin: "6px 0 2px", fontSize: 14 }}>{whatsappHelp.heading || "Need Quick Help?"}</h4>
-            <p style={{ fontSize: 11, color: "#33613f", margin: "0 0 10px" }}>
+          <div style={{ background: "#d9f2e3", borderRadius: 14, padding: 24, textAlign: "center" }}>
+            <FiMessageCircle size={28} color="#1b6f3c" />
+            <h4 style={{ margin: "8px 0 4px", fontSize: 17 }}>{whatsappHelp.heading || "Need Quick Help?"}</h4>
+            <p style={{ fontSize: 14, color: "#33613f", margin: "0 0 14px" }}>
               {whatsappHelp.body || "Message us directly on WhatsApp for immediate assistance."}
             </p>
             <a
@@ -159,15 +159,15 @@ export default function Contact() {
               target="_blank"
               rel="noreferrer"
               className="btn btn-whatsapp"
-              style={{ fontSize: 12, padding: "7px 16px" }}
+              style={{ fontSize: 15, padding: "10px 22px" }}
             >
               <FiMessageCircle /> Chat on WhatsApp
             </a>
           </div>
         </div>
 
-        <div style={{ background: "#fff", borderRadius: 16, padding: 28 }}>
-          <h3 style={{ marginTop: 0 }}>{formSec.heading || "Send us a Message"}</h3>
+        <div style={{ background: "#fff", borderRadius: 16, padding: 40, display: "flex", flexDirection: "column" }}>
+          <h3 style={{ marginTop: 0, fontSize: 24 }}>{formSec.heading || "Send us a Message"}</h3>
           <p style={{ color: "var(--text-muted)", fontSize: 14 }}>
             {formSec.body || "Fill out the form below and we'll get back to you as soon as possible."}
           </p>
@@ -176,7 +176,7 @@ export default function Contact() {
               {formSec.successMessage || "Thanks! Your message has been sent — we'll be in touch shortly."}
             </div>
           )}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", flex: 1 }}>
             <label style={{ fontSize: 14, fontWeight: 600 }}>{(formSec.fields || {}).nameLabel || "Name"} *</label>
             <input
               name="name"
@@ -231,7 +231,7 @@ export default function Contact() {
               onChange={handleChange}
               placeholder="Write your message here..."
               rows={5}
-              style={{ ...inputStyle, resize: "vertical" }}
+              style={{ ...inputStyle, resize: "vertical", flex: 1 }}
             />
             {errors.message && <p style={errorStyle}>{errors.message}</p>}
 
@@ -313,13 +313,13 @@ export default function Contact() {
           ))}
         </div>
       </div>
-      <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
-        <div style={{ borderRadius: 16, overflow: "hidden" }}>
+      <div style={{ paddingTop: 60 }}>
+        <div style={{ overflow: "hidden" }}>
           <iframe
             title="Riya & Rakshya Food Products location"
             src="https://www.google.com/maps?q=Bhairahawa,Rupandehi,Nepal&output=embed"
             width="100%"
-            height="380"
+            height="500"
             style={{ border: 0, display: "block" }}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -332,13 +332,13 @@ export default function Contact() {
 
 const inputStyle = {
   width: "100%",
-  padding: "10px 14px",
+  padding: "12px 16px",
   borderRadius: 8,
   border: "1px solid var(--border-color)",
   background: "#fff",
-  margin: "6px 0 14px",
+  margin: "6px 0 16px",
   fontFamily: "inherit",
-  fontSize: 14,
+  fontSize: 15,
   transition: "border-color 0.2s ease, box-shadow 0.2s ease",
 };
 

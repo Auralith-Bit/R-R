@@ -61,7 +61,7 @@ export default function Manufacturing() {
       />
 
       {/* ── Process Steps ── */}
-      <section style={{ background: "var(--gray-bg)", padding: "48px 0", overflow: "hidden" }}>
+      <section style={{ background: "var(--gray-bg)", padding: "64px 0", overflow: "hidden" }}>
         <div className="container">
           <div style={{ textAlign: "center", maxWidth: 920, margin: "0 auto" }}>
             <p style={{ color: "var(--red)", fontWeight: 700, letterSpacing: 2, fontSize: 13, textTransform: "uppercase", marginBottom: 6 }}>
@@ -117,7 +117,7 @@ export default function Manufacturing() {
       `}</style>
 
       {/* ── Inside Our Facility ── */}
-      <section style={{ background: "#FDF5F5", padding: "40px 0" }}>
+      <section style={{ background: "#FDF5F5", padding: "56px 0" }}>
         <div className="container">
           <div className="facility-grid">
             <div>
@@ -172,7 +172,7 @@ export default function Manufacturing() {
       </section>
 
       {/* ── Why Choose Us ── */}
-      <section style={{ background: "var(--gray-bg)", padding: "40px 0" }}>
+      <section style={{ background: "var(--gray-bg)", padding: "56px 0" }}>
         <div className="container">
           <div className="why-choose-grid">
             <div style={{ background: "var(--dark)", borderRadius: 16, padding: "32px 24px", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", color: "#fff" }}>
@@ -213,9 +213,9 @@ export default function Manufacturing() {
       </section>
 
       {/* ── CTA Banner ── */}
-      <section style={{ padding: "40px 24px", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
+      <section style={{ padding: "40px clamp(20px, 8vw, 140px)", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
         <div style={{ maxWidth: 1380, margin: "0 auto" }}>
-          <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, minHeight: 380, boxShadow: "0 30px 80px rgba(0,0,0,0.18)" }}>
+          <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, minHeight: 340, boxShadow: "0 30px 80px rgba(0,0,0,0.18)" }}>
             <img
               src={encodeURI(ctaSec.image || "/images/hero/kushal namkeen backgraound CTA.png")}
               alt="Banner"
@@ -224,7 +224,7 @@ export default function Manufacturing() {
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
             />
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)" }} />
-            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 380, padding: "32px 12px" }}>
+            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 340, padding: "28px 16px" }}>
               <h2 style={{ maxWidth: 960, color: "#fff", fontWeight: 700, fontSize: "clamp(20px, 2.5vw, 36px)", lineHeight: 1.2, marginTop: 0 }}>
                 {ctaSec.heading || "The Ultimate Crunchy Chips Experience"}
               </h2>
@@ -286,7 +286,7 @@ export default function Manufacturing() {
       </section>
 
       {/* ── Our Capabilities ── */}
-      <div className="container" style={{ paddingTop: 40, paddingBottom: 40 }}>
+      <div className="container" style={{ paddingTop: 56, paddingBottom: 56 }}>
         <div style={{ textAlign: "center", marginBottom: 24 }}>
           <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 4 }}>{capSec.tag || "OUR CAPABILITIES"}</p>
           <h2 style={{ marginTop: 0, fontSize: "clamp(20px, 2.5vw, 32px)" }}>{capSec.heading || "Why Our Manufacturing Stands Out"}</h2>

@@ -65,12 +65,14 @@ export default function ProductDetail() {
 
       <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
         <div className="product-detail-grid" style={{ gridTemplateColumns: "0.8fr 1.2fr" }}>
-          <img
-            src={imgError ? "/images/Logo.png" : encodeURI(product.image)}
-            alt={product.name}
-            style={{ width: "100%", borderRadius: 12, objectFit: "contain" }}
-            onError={() => setImgError(true)}
-          />
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <img
+              src={imgError ? "/images/Logo.png" : encodeURI(product.image)}
+              alt={product.name}
+              style={{ maxWidth: "80%", maxHeight: 360, borderRadius: 12, objectFit: "contain" }}
+              onError={() => setImgError(true)}
+            />
+          </div>
           <div>
             <span
               style={{
