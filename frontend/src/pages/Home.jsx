@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiShoppingBag, FiMessageCircle, FiArrowRight, FiCheck, FiStar, FiZap, FiHeart } from "react-icons/fi";
 import { FaStar, FaMedal, FaBuilding, FaShieldAlt, FaUsers, FaTruck, FaPlay, FaHome, FaAward, FaHandshake, FaClock, FaGlobeAsia, FaStore, FaBoxes, FaMapMarkerAlt } from "react-icons/fa";
@@ -29,6 +29,21 @@ export default function Home() {
   const [testimonialPage, setTestimonialPage] = useState(1);
   const testimonialTotalPages = Math.ceil(testimonials.length / testimonialsPerPage);
 
+  const slides = hero.slides || [
+    "/images/hero/hero-bg.png",
+    "/images/hero/home hero kushal namkeen.png",
+    "/images/hero/home hero makai and diet.png",
+    "/images/hero/home hero cheese balls.png",
+    "/images/hero/home hero aone chips green.png",
+  ];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 2400);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
   const whatsAppNumber = settings?.whatsappNumber || "9779820299711";
   const defaultStats = [
     ["500+", "Happy Retailers", "var(--red)"],
@@ -53,7 +68,7 @@ export default function Home() {
           <h1 className="home-hero__h1">
             {hero.heading || "One Bite & You Won't Stop"} <span>{hero.headingHighlight || "Craving"}</span>
           </h1>
-          <p className="home-hero__sub" style={{ color: '#000' }}>
+          <p className="home-hero__sub">
             {hero.subtitle || "Instant noodles, crunchy snacks, and bulk packs delivered straight to your door. Freshness guaranteed in every bite."}
           </p>
           <div className="home-hero__btns">
@@ -80,13 +95,7 @@ export default function Home() {
           </div>
         </div>
 
-        {(hero.slides || [
-          "/images/hero/hero-bg.png",
-          "/images/hero/home hero kushal namkeen.png",
-          "/images/hero/home hero makai and diet.png",
-          "/images/hero/home hero cheese balls.png",
-          "/images/hero/home hero aone chips green.png",
-        ]).map((slide, i) => {
+        {slides.map((slide, i) => {
           const classes = ["slide-title", "slide-namkeen", "slide-makai", "slide-cheese", "slide-aone"];
           const alts = ["", "Kushal Namkeen", "Makai Diet", "Cheese Balls", "Aone Chips Green"];
           return i === 0 ? (
@@ -104,8 +113,8 @@ export default function Home() {
         })}
 
         <div className="hero-dots">
-          {(hero.slides || [1,2,3,4,5]).map((_, i) => (
-            <button key={i} className={`hero-dot ${i === 0 ? "active" : ""}`} aria-label={`Slide ${i + 1}`} />
+          {slides.map((_, i) => (
+            <button key={i} className={`hero-dot ${i === currentSlide ? "active" : ""}`} onClick={() => setCurrentSlide(i)} aria-label={`Slide ${i + 1}`} />
           ))}
         </div>
       </section>

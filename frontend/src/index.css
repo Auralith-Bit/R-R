@@ -358,7 +358,7 @@ select:focus {
 .page-hero-v2 {
   position: relative;
   width: 100%;
-  height: 440px;
+  height: clamp(320px, 35vw, 500px);
   overflow: hidden;
   isolation: isolate;
   display: flex;
@@ -455,15 +455,22 @@ select:focus {
 }
 @media (max-width: 720px) {
   .page-hero-v2 {
-    height: 300px;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  .home-hero {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16/9;
+  }
+  .home-hero__content {
+    min-height: auto;
+  }
+  .page-hero-v2-static {
+    background-size: cover;
   }
   .page-hero-v2-copy h1 {
     font-size: 28px;
-  }
-}
-@media (min-width: 1400px) {
-  .page-hero-v2 {
-    height: 500px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1861,8 +1868,69 @@ select:focus {
   .container {
     padding: 0 48px;
   }
+  .page-hero-v2 {
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  .home-hero {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16/9;
+  }
   .home-hero__content {
     max-width: 600px;
+    min-height: auto;
+    padding-top: 80px;
+  }
+
+  .navbar-inner {
+    gap: 8px;
+    justify-content: flex-start;
+  }
+  .nav-burger {
+    display: block;
+  }
+  .nav-right {
+    gap: 10px;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: flex !important;
+  }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--cream);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px 16px 20px;
+    border-bottom: 1px solid #eee4b8;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links a {
+    padding: 12px 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .nav-links a::after {
+    display: none;
+  }
+  .nav-links .search-box {
+    margin: 14px 0 10px;
+  }
+  .nav-links .btn-whatsapp {
+    width: 100%;
+  }
+  .nav-right {
+    gap: 10px;
   }
   .home-hero .home-hero__h1 {
     max-width: 480px;
@@ -1986,50 +2054,6 @@ select:focus {
     height: 20px;
   }
 
-  /* Navbar collapses into a slide-down menu */
-  .nav-burger {
-    display: block;
-  }
-  .desktop-only {
-    display: none !important;
-  }
-  .mobile-only {
-    display: flex !important;
-  }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--cream);
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 10px 16px 20px;
-    border-bottom: 1px solid #eee4b8;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-  .nav-links.open {
-    display: flex;
-  }
-  .nav-links a {
-    padding: 12px 4px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  }
-  .nav-links a::after {
-    display: none;
-  }
-  .nav-links .search-box {
-    margin: 14px 0 10px;
-  }
-  .nav-links .btn-whatsapp {
-    width: 100%;
-  }
-  .brand-text small {
-    display: none;
-  }
-
   .page-hero {
     padding: 44px 0 50px;
   }
@@ -2140,9 +2164,22 @@ select:focus {
   .container {
     padding: 0 16px;
   }
+  .page-hero-v2 {
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+  .home-hero {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16/9;
+  }
+  .page-hero-v2-static {
+    background-size: cover;
+  }
   .home-hero__content {
     padding: 0 4%;
     gap: 10px;
+    min-height: auto;
   }
   .home-hero__stats {
     gap: 10px;
