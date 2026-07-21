@@ -71,7 +71,7 @@ export default function Footer() {
         <div>
           <h4>Contact Us</h4>
           <ul>
-            <li>{settings?.address || "S.No.-4, SugarMill, Bhairahwa, Rupandehi"}</li>
+            <li>{settings?.address || "S.N.P-04, SugarMill Area, Bhairahawa Rupandehi"}</li>
             <li>{settings?.contactPhone || "+977 982-0299711"}</li>
             <li>{settings?.contactEmail || "Support@riyarakshya.com.np"}</li>
           </ul>

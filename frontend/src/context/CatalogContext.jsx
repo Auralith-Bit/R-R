@@ -20,7 +20,7 @@ const FALLBACK_DATA = {
     contactEmail: "Support@riyarakshya.com.np",
     contactPhone: "+977 982-0299711",
     whatsappNumber: "9779857021032",
-    address: "S.No.-4, SugarMill area, Bhairahawa, Nepal",
+    address: "S.N.P-04, SugarMill Area, Bhairahawa Rupandehi",
   },
   pages: {},
 };

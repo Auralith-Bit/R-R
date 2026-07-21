@@ -89,30 +89,30 @@ export default function About() {
         </div>
         <div className="mission-vision-grid">
           <div className="mission-card mission">
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
               <span style={{ fontSize: 22 }}>🎯</span>
               <h3 style={{ margin: 0, fontSize: 18, color: "#fff" }}>{(mv.mission || {}).title || "Our Mission"}</h3>
             </div>
-            <p style={{ opacity: 0.9, lineHeight: 1.5, fontSize: 13, margin: 0, color: "#fff" }}>
-              {(mv.mission || {}).body || "To become Nepal's most trusted and widely loved snack brand, recognized for quality, innovation, and the happiness we bring to our customers."}
+            <p style={{ opacity: 0.9, lineHeight: 2.2, fontSize: 14, margin: "28px 0", color: "#fff" }}>
+              {(mv.mission || {}).body || "To become Nepal's most trusted and loved snack brand by delivering high-quality, innovative, and delicious products that create happiness and memorable moments for every customer. We are committed to using the finest ingredients, maintaining the highest standards of hygiene, and continuously innovating to bring flavors that delight every Nepali household. With passion and dedication, we aim to grow alongside our customers, sharing joy in every bite and building lasting relationships rooted in trust and quality."}
             </p>
-            <div style={{ display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 6, paddingTop: 16, flexWrap: "wrap" }}>
               {((mv.mission || {}).tags || ["Tasty", "Convenient", "Affordable"]).map((t) => (
-                <span key={t} style={{ background: "rgba(240,185,11,0.2)", color: "#f0b90b", padding: "3px 10px", borderRadius: 999, fontSize: 11 }}>{t}</span>
+                <span key={t} style={{ background: "rgba(240,185,11,0.2)", color: "#f0b90b", padding: "4px 12px", borderRadius: 999, fontSize: 12 }}>{t}</span>
               ))}
             </div>
           </div>
           <div className="mission-card vision">
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
               <span style={{ fontSize: 22 }}>🔭</span>
               <h3 style={{ margin: 0, fontSize: 18, color: "#fff" }}>{(mv.vision || {}).title || "Our Vision"}</h3>
             </div>
-            <p style={{ opacity: 0.9, lineHeight: 1.5, fontSize: 13, margin: 0, color: "#fff" }}>
-              {(mv.vision || {}).body || "To inspire healthier snacking habits across Nepal by delivering innovative, delicious, and affordable products that bring families together and celebrate the joy of eating well."}
+            <p style={{ opacity: 0.9, lineHeight: 2.2, fontSize: 14, margin: "28px 0", color: "#fff" }}>
+              {(mv.vision || {}).body || "To inspire healthier snacking habits across Nepal through innovative, affordable, and tasty products that bring families together and celebrate the joy of sharing. We envision a future where every Nepali can enjoy nutritious and delicious snacks made with love, care, and a deep respect for tradition."}
             </p>
-            <div style={{ display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 6, paddingTop: 16, flexWrap: "wrap" }}>
               {((mv.vision || {}).tags || ["Innovative", "Loved", "Trusted"]).map((t) => (
-                <span key={t} style={{ background: "rgba(240,185,11,0.2)", color: "#f0b90b", padding: "3px 10px", borderRadius: 999, fontSize: 11 }}>{t}</span>
+                <span key={t} style={{ background: "rgba(240,185,11,0.2)", color: "#f0b90b", padding: "4px 12px", borderRadius: 999, fontSize: 12 }}>{t}</span>
               ))}
             </div>
           </div>

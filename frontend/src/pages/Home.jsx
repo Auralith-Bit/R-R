@@ -266,7 +266,6 @@ export default function Home() {
             <h2 style={{ marginTop: 0 }}>{aboutStorySec.heading || "The R&R Story"}</h2>
             {(aboutStorySec.body || [
               "We started with one goal: make snacks that are fast, tasty, and satisfying. From our kitchen to your table, every bite is crafted with care, using quality ingredients and attention to detail. We believe that great taste comes from consistency and passion in every step of the process.",
-              "In a small kitchen in Bhairahawa, two passionate food lovers began experimenting with traditional recipes, blending age-old flavors with modern convenience. What started as a family passion quickly grew into something bigger.",
               "Today, Riya and Rakshya Food Products manufactures over 60 varieties of instant noodles, namkeen, dalmot, chips and bhujiya — loved by thousands across Nepal.",
             ]).map((para, i) => (
               <p key={i} style={{ lineHeight: 1.7, color: "var(--text-muted)" }}>{para}</p>

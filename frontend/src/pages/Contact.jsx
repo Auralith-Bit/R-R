@@ -84,7 +84,7 @@ export default function Contact() {
     { label: "Business/Wholesale", value: "+977 985-7021032" },
     { label: "Support Email", value: "Support@riyarakshya.com.np" },
     { label: "Sales/Distributors", value: "Sales@riyarakshya.com.np" },
-    { label: "Address", value: "S.No.-4, SugarMill, Bhairahwa, Rupandehi" },
+    { label: "Address", value: "S.N.P-04, SugarMill Area, Bhairahawa Rupandehi" },
     { label: "Business Hours", value: "Sunday\u2013Friday (9:00 AM \u2013 6:00 PM)" },
   ];
 
@@ -100,7 +100,7 @@ export default function Contact() {
   const quickHelpIcons = [FiAlertTriangle, FiFeather, FiThermometer, FiCalendar];
 
   const defaultFaqs = [
-    { q: "Where is Riya & Rakshya Food Products located?", a: "Our manufacturing facility is located in Bhairahwa, Nepal. We operate from S.No.-4, SugarMill area and serve customers across all 77 districts of Nepal." },
+    { q: "Where is Riya & Rakshya Food Products located?", a: "Our manufacturing facility is located in Bhairahawa, Nepal. We operate from S.N.P-04, SugarMill Area and serve customers across all 77 districts of Nepal." },
     { q: "Are your snacks vegetarian?", a: "Yes, all our snacks are 100% vegetarian and prepared in a dedicated vegetarian facility." },
     { q: "How can I become a distributor?", a: "Please reach out via our contact form or call our business line. We will guide you through the distributor onboarding process with competitive pricing and dedicated support." },
     { q: "Do you offer bulk order discounts?", a: "Yes, we offer factory-direct pricing for bulk orders and have dedicated support for retailers and distributors. Contact our sales team for custom quotes based on your order volume." },

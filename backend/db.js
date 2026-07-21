@@ -26,7 +26,7 @@ const DEFAULT_DB = {
     contactEmail: "Support@riyarakshya.com.np",
     contactPhone: "+977 982-0299711",
     whatsappNumber: "9779857021032",
-    address: "S.No.-4, SugarMill area, Bhairahawa, Nepal",
+    address: "S.N.P-04, SugarMill Area, Bhairahawa Rupandehi",
   },
   pages: {},
   admin: null, // { username, passwordHash } — set by seed.js / first-run
