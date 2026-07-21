@@ -101,21 +101,6 @@ export default function Manufacturing() {
         </div>
       </section>
 
-      <style>{`
-        .timeline-dashed-line { display: none; }
-        @media (min-width: 1200px) {
-          .timeline-dashed-line {
-            display: block;
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            right: 10%;
-            border-top: 3px dashed var(--red);
-            z-index: 1;
-          }
-        }
-      `}</style>
-
       {/* ── Inside Our Facility ── */}
       <section style={{ background: "#FDF5F5", padding: "56px 0" }}>
         <div className="container">
@@ -126,7 +111,7 @@ export default function Manufacturing() {
                 alt="Manufacturing Facility"
                 loading="lazy"
                 decoding="async"
-                style={{ width: "100%", height: 480, objectFit: "cover", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
+                style={{ width: "100%", objectFit: "cover", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
               />
             </div>
             <div>
@@ -270,7 +255,7 @@ export default function Manufacturing() {
                         style={{
                           height: 36, paddingInline: 18, borderRadius: 999,
                           border: "1px solid rgba(255,255,255,0.4)", background: "rgba(255,255,255,0.1)",
-                          backdropFilter: "blur(12px)", display: "flex", alignItems: "center", gap: 6, color: "#fff",
+                          backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", display: "flex", alignItems: "center", gap: 6, color: "#fff",
                         }}
                       >
                         {icons[i] || <Truck size={16} />}

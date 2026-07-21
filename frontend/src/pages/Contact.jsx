@@ -319,7 +319,7 @@ export default function Contact() {
             title="Riya & Rakshya Food Products location"
             src="https://www.google.com/maps?q=Bhairahawa,Rupandehi,Nepal&output=embed"
             width="100%"
-            height="500"
+            className="contact-map-iframe"
             style={{ border: 0, display: "block" }}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

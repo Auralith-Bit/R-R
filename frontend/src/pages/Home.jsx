@@ -16,7 +16,7 @@ export default function Home() {
   const newArrivalsSec = p.newArrivals || {};
   const storySec = p.story || {};
   const featuredSec = p.featuredProducts || {};
-  const perksData = p.perks || [];
+  const perksData = (p.perks || []).map(p => typeof p === "string" ? { title: p, desc: "" } : p);
   const aboutStorySec = p.aboutStory || {};
   const ctaBanner = p.ctaBanner || {};
   const testimonialsSec = p.testimonials || {};
@@ -85,7 +85,7 @@ export default function Home() {
               return (
                 <React.Fragment key={val[1]}>
                   <div className="home-hero__stat">
-                    <span className="home-hero__stat-num" style={{ color: "#d32f2f" }}>{val[0]}</span>
+                    <span className="home-hero__stat-num" style={{ color: "var(--red)" }}>{val[0]}</span>
                     <span className="home-hero__stat-label">{val[1]}</span>
                   </div>
                   {i < arr.length - 1 && <div className="home-hero__stat-divider" />}
@@ -152,7 +152,7 @@ export default function Home() {
             <p style={{ lineHeight: 1.6, color: "var(--text-muted)", fontSize: 15, marginBottom: 12, marginTop: 0 }}>
               {storySec.body?.[0] || "Crafted with care using premium ingredients in our state-of-the-art facility."}
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
+            <div className="home-story-features-grid">
               {(storySec.features || [
                 { title: "100% Vegetarian", desc: "Every product is made with plant-based ingredients, making it a guilt-free choice for all ages." },
                 { title: "Premium Quality", desc: "We use only the finest raw materials, carefully sourced and tested to ensure authentic taste in every bite." },
@@ -189,8 +189,8 @@ export default function Home() {
                 );
               })}
             </div>
-            <Link to="/about" className="btn btn-red" style={{ marginTop: 20, alignSelf: "flex-start", padding: "8px 18px", fontSize: 13 }}>
-              {storySec.ctaText || "Learn more about us"} <FiArrowRight size={14} />
+            <Link to="/about" className="btn btn-red" style={{ marginTop: 16, alignSelf: "flex-start" }}>
+              {storySec.ctaText || "Learn more about us"} <FiArrowRight />
             </Link>
           </div>
         </div>

@@ -202,7 +202,7 @@ const PagesTab = (() => {
       </div>
 
       ${sectionHead("Perks Marquee (one title|desc per line)")}
-      ${listArea("Perks (format: title|desc)", "perks", d)}
+      ${listAreaObjects("Perks (format: title|desc)", "perks", d)}
 
       ${sectionHead("About Story Section")}
       <div class="form-grid">
