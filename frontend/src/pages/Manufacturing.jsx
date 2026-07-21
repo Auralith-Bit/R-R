@@ -213,7 +213,7 @@ export default function Manufacturing() {
       </section>
 
       {/* ── CTA Banner ── */}
-      <section style={{ padding: "40px clamp(20px, 8vw, 140px)", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
+      <section style={{ padding: "40px clamp(40px, 10vw, 160px)", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
         <div style={{ maxWidth: 1380, margin: "0 auto" }}>
           <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, minHeight: 340, boxShadow: "0 30px 80px rgba(0,0,0,0.18)" }}>
             <img
