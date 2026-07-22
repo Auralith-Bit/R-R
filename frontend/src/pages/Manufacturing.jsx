@@ -199,8 +199,8 @@ export default function Manufacturing() {
 
       {/* ── CTA Banner ── */}
       <section style={{ padding: "40px 0", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
-        <div className="container">
-          <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, minHeight: 400, boxShadow: "0 30px 80px rgba(0,0,0,0.18)" }}>
+        <div className="container" style={{ display: "flex", justifyContent: "center" }}>
+          <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, boxShadow: "0 30px 80px rgba(0,0,0,0.18)", width: "100%", maxWidth: 960 }}>
             <img
               src={encodeURI(ctaSec.image || "/images/hero/kushal namkeen backgraound CTA.png")}
               alt="Banner"
@@ -209,7 +209,7 @@ export default function Manufacturing() {
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
             />
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)" }} />
-            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 400, padding: "28px 16px" }}>
+            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "72px 40px" }}>
               <h2 style={{ maxWidth: 960, color: "#fff", fontWeight: 700, fontSize: "clamp(20px, 2.5vw, 36px)", lineHeight: 1.2, marginTop: 0 }}>
                 {ctaSec.heading || "The Ultimate Crunchy Chips Experience"}
               </h2>
