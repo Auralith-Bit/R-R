@@ -135,13 +135,13 @@ export default function Home() {
 
       <section style={{ background: "#FDF5F5", padding: "60px 0" }}>
         <div className="container">
-        <div className="about-story-grid">
+        <div className="about-story-grid" style={{ alignItems: "stretch" }}>
           <img
             src={encodeURI(storySec.image || "/images/home page below new arrivals.png")}
             alt="R&R production facility"
             loading="lazy"
             decoding="async"
-            style={{ borderRadius: 16, width: "100%", height: "auto" }}
+            style={{ borderRadius: 16, width: "100%", height: "100%", objectFit: "cover" }}
           />
           <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "8px 0" }}>
             <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 4, fontSize: 13 }}>
@@ -188,7 +188,7 @@ export default function Home() {
                 );
               })}
             </div>
-            <Link to="/about" className="btn btn-red" style={{ marginTop: 16, alignSelf: "flex-start" }}>
+            <Link to="/about" className="btn btn-red" style={{ marginTop: 24, alignSelf: "flex-start" }}>
               {storySec.ctaText || "Learn more about us"} <FiArrowRight />
             </Link>
           </div>
@@ -250,13 +250,13 @@ export default function Home() {
 
       <section style={{ background: "#f7f2eb", padding: "60px 0" }}>
         <div className="container">
-        <div className="about-story-grid">
+        <div className="about-story-grid" style={{ alignItems: "stretch" }}>
           <img
             src={encodeURI(aboutStorySec.image || "/images/abouthome.png")}
             alt="The R&R Story"
             loading="lazy"
             decoding="async"
-            style={{ borderRadius: 16, width: "100%", height: "auto" }}
+            style={{ borderRadius: 16, width: "100%", height: "100%", objectFit: "cover" }}
           />
           <div>
             <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 6 }}>
@@ -336,7 +336,7 @@ export default function Home() {
 
       <div style={{ background: "#fff", padding: "60px 0" }}>
         <div className="container">
-          <div className="about-story-grid">
+          <div className="about-story-grid" style={{ alignItems: "stretch" }}>
             <div>
               <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 6 }}>{howWeMakeItSec.tag || "HOW WE MAKE IT"}</p>
               <h2 style={{ marginTop: 0 }}>{howWeMakeItSec.heading || "Crafted With Care, Delivered With Trust"}</h2>
@@ -350,17 +350,15 @@ export default function Home() {
                 {howWeMakeItSec.ctaText || "See How It's Made"} <FiArrowRight />
               </Link>
             </div>
-            <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.1)", background: "#f5f5f5", border: "1px solid var(--border-color)" }}>
-              <div style={{ position: "relative", paddingTop: "56.25%" }}>
+            <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.1)", background: "#f5f5f5", border: "1px solid var(--border-color)", display: "flex" }}>
                 <video
                   src={howWeMakeItSec.video || "/videos/RnR video.mp4"}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "contain", background: "#f5f5f5" }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                 />
-              </div>
             </div>
           </div>
         </div>
