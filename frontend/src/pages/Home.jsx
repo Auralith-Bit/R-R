@@ -134,30 +134,29 @@ export default function Home() {
       </section>
 
       <section style={{ background: "#FDF5F5", padding: "60px 0" }}>
-        <div className="container about-story-grid" style={{ alignItems: "stretch" }}>
-          <div style={{ height: "100%" }}>
-            <img
-              src={encodeURI(storySec.image || "/images/home page below new arrivals.png")}
-              alt="R&R production facility"
-              loading="lazy"
-              decoding="async"
-              style={{ borderRadius: 16, width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          </div>
+        <div className="container">
+        <div className="about-story-grid">
+          <img
+            src={encodeURI(storySec.image || "/images/home page below new arrivals.png")}
+            alt="R&R production facility"
+            loading="lazy"
+            decoding="async"
+            style={{ borderRadius: 16, width: "100%", height: "auto" }}
+          />
           <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "8px 0" }}>
             <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 4, fontSize: 13 }}>
               {storySec.tag || "HEALTHY LIVING"}
             </p>
-            <h2 style={{ marginTop: 0, marginBottom: 4, fontSize: "clamp(22px, 2.5vw, 32px)" }}>{storySec.heading || "Nepal's Most Trusted Snack Brand"}</h2>
-            <p style={{ lineHeight: 1.6, color: "var(--text-muted)", fontSize: 15, marginBottom: 12, marginTop: 0 }}>
+            <h2 style={{ marginTop: 0, marginBottom: 8, fontSize: "clamp(22px, 2.5vw, 32px)" }}>{storySec.heading || "Nepal's Most Trusted Snack Brand"}</h2>
+            <p style={{ lineHeight: 1.7, color: "var(--text-muted)", fontSize: 15, marginBottom: 16, marginTop: 0 }}>
               {storySec.body?.[0] || "Crafted with care using premium ingredients in our state-of-the-art facility."}
             </p>
             <div className="home-story-features-grid">
               {(storySec.features || [
-                { title: "100% Vegetarian", desc: "Every product is made with plant-based ingredients, making it a guilt-free choice for all ages." },
-                { title: "Premium Quality", desc: "We use only the finest raw materials, carefully sourced and tested to ensure authentic taste in every bite." },
-                { title: "Fast Delivery", desc: "Our nationwide logistics network ensures your favorite snacks reach you fresh and on time, every time." },
-                { title: "Trusted Brand", desc: "Backed by over 500+ happy retailers and loved by families across all 77 districts of Nepal." },
+                { title: "100% Vegetarian", desc: "Plant-based ingredients for a guilt-free snack." },
+                { title: "Premium Quality", desc: "Finest raw materials for authentic taste." },
+                { title: "Fast Delivery", desc: "Fresh snacks delivered on time, nationwide." },
+                { title: "Trusted Brand", desc: "Loved by families across all 77 districts." },
               ]).map((item, i) => {
                 const icons = [<FiCheck />, <FiStar />, <FiZap />, <FiHeart />];
                 return (
@@ -166,25 +165,25 @@ export default function Home() {
                     style={{
                       background: "#fff",
                       borderRadius: 12,
-                      padding: "16px",
+                      padding: "12px",
                       border: "1px solid var(--border-color)",
                       boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
                     }}
                   >
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                       <span
                         style={{
-                          width: 32, height: 32, borderRadius: 8,
+                          width: 28, height: 28, borderRadius: 8,
                           background: "var(--cream)", color: "var(--red)",
                           display: "flex", alignItems: "center", justifyContent: "center",
-                          flexShrink: 0, fontSize: 14,
+                          flexShrink: 0, fontSize: 13,
                         }}
                       >
                         {icons[i] || <FiCheck />}
                       </span>
                       <strong style={{ fontSize: 13 }}>{item.title}</strong>
                     </div>
-                    <p style={{ margin: 0, fontSize: 12, lineHeight: 1.5, color: "var(--text-muted)" }}>{item.desc}</p>
+                    <p style={{ margin: 0, fontSize: 12, lineHeight: 1.4, color: "var(--text-muted)" }}>{item.desc}</p>
                   </div>
                 );
               })}
@@ -193,6 +192,7 @@ export default function Home() {
               {storySec.ctaText || "Learn more about us"} <FiArrowRight />
             </Link>
           </div>
+        </div>
         </div>
       </section>
 
@@ -249,16 +249,15 @@ export default function Home() {
       </section>
 
       <section style={{ background: "#f7f2eb", padding: "60px 0" }}>
-        <div className="container about-story-grid" style={{ alignItems: "stretch" }}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <img
-              src={encodeURI(aboutStorySec.image || "/images/abouthome.png")}
-              alt="The R&R Story"
-              loading="lazy"
-              decoding="async"
-              style={{ borderRadius: 16, width: "100%", objectFit: "contain", maxHeight: 500 }}
-            />
-          </div>
+        <div className="container">
+        <div className="about-story-grid">
+          <img
+            src={encodeURI(aboutStorySec.image || "/images/abouthome.png")}
+            alt="The R&R Story"
+            loading="lazy"
+            decoding="async"
+            style={{ borderRadius: 16, width: "100%", height: "auto" }}
+          />
           <div>
             <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 6 }}>
               {aboutStorySec.tag || "ABOUT US"}
@@ -274,6 +273,7 @@ export default function Home() {
               {aboutStorySec.ctaText || "Learn more about us"} <FiArrowRight />
             </Link>
           </div>
+        </div>
         </div>
       </section>
 

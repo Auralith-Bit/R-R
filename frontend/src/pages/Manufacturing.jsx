@@ -104,14 +104,14 @@ export default function Manufacturing() {
       {/* ── Inside Our Facility ── */}
       <section style={{ background: "#FDF5F5", padding: "56px 0" }}>
         <div className="container">
-          <div className="facility-grid">
+          <div className="facility-grid" style={{ alignItems: "stretch" }}>
             <div>
               <img
                 src={encodeURI(facilitySec.image || "/images/manufacturingquality.png")}
                 alt="Manufacturing Facility"
                 loading="lazy"
                 decoding="async"
-                style={{ width: "100%", objectFit: "cover", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
               />
             </div>
             <div>
@@ -198,9 +198,9 @@ export default function Manufacturing() {
       </section>
 
       {/* ── CTA Banner ── */}
-      <section style={{ padding: "40px clamp(50px, 12vw, 180px)", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
-        <div style={{ maxWidth: 1380, margin: "0 auto" }}>
-          <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, minHeight: 340, boxShadow: "0 30px 80px rgba(0,0,0,0.18)" }}>
+      <section style={{ padding: "40px 0", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
+        <div className="container">
+          <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, minHeight: 400, boxShadow: "0 30px 80px rgba(0,0,0,0.18)" }}>
             <img
               src={encodeURI(ctaSec.image || "/images/hero/kushal namkeen backgraound CTA.png")}
               alt="Banner"
@@ -209,7 +209,7 @@ export default function Manufacturing() {
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
             />
             <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)" }} />
-            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 340, padding: "28px 16px" }}>
+            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", minHeight: 400, padding: "28px 16px" }}>
               <h2 style={{ maxWidth: 960, color: "#fff", fontWeight: 700, fontSize: "clamp(20px, 2.5vw, 36px)", lineHeight: 1.2, marginTop: 0 }}>
                 {ctaSec.heading || "The Ultimate Crunchy Chips Experience"}
               </h2>
@@ -278,15 +278,15 @@ export default function Manufacturing() {
         </div>
         <div className="manufacturing-why-grid">
           {capabilities.map((item) => (
-            <div key={item.title} style={{ background: "#fff", borderRadius: 10, padding: 18, textAlign: "center", border: "1px solid var(--border-color)", boxShadow: "var(--shadow-sm)", transition: "var(--transition)" }}
+            <div key={item.title} style={{ background: "#fff", borderRadius: 14, padding: "24px 20px", textAlign: "center", border: "1px solid var(--border-color)", boxShadow: "var(--shadow-sm)", transition: "var(--transition)" }}
               onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "var(--shadow-md)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "var(--shadow-sm)"; }}
             >
-              <div style={{ width: 40, height: 40, borderRadius: 10, background: "var(--cream)", color: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px", fontSize: 18 }}>
+              <div style={{ width: 52, height: 52, borderRadius: 14, background: "var(--cream)", color: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", fontSize: 22 }}>
                 <FaIndustry />
               </div>
-              <h4 style={{ margin: "0 0 4px", fontSize: 14 }}>{item.title}</h4>
-              <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0, lineHeight: 1.5 }}>{item.desc}</p>
+              <h4 style={{ margin: "0 0 6px", fontSize: 16 }}>{item.title}</h4>
+              <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0, lineHeight: 1.6 }}>{item.desc}</p>
             </div>
           ))}
         </div>

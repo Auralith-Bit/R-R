@@ -160,8 +160,8 @@ export default function About() {
 
       <div className="container" style={{ paddingTop: 48, paddingBottom: 48 }}>
         <div className="quality-grid">
-          <div className="quality-image" style={{ minHeight: 420, background: "transparent" }}>
-            <video autoPlay muted loop playsInline style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 18, display: "block" }}>
+          <div className="quality-image" style={{ background: "transparent" }}>
+            <video autoPlay muted loop playsInline style={{ width: "100%", borderRadius: 18, display: "block" }}>
               <source src={qualitySec.video || "/videos/RnR video.mp4"} type="video/mp4" />
             </video>
           </div>
@@ -228,7 +228,8 @@ export default function About() {
       </div>
 
       <div style={{ background: "#f7f2eb", padding: "60px 0" }}>
-        <div className="container about-story-grid" style={{ alignItems: "center" }}>
+        <div className="container">
+        <div className="about-story-grid" style={{ alignItems: "center" }}>
           <div className="quality-image">
             <video autoPlay muted loop playsInline style={{ width: "100%", borderRadius: 18 }}>
               <source src={peopleSec.video || "/videos/the people behind us.mp4"} type="video/mp4" />
@@ -244,6 +245,7 @@ export default function About() {
               <p key={i} style={{ lineHeight: 1.75, color: "var(--text-muted)" }}>{para}</p>
             ))}
           </div>
+        </div>
         </div>
       </div>
 
