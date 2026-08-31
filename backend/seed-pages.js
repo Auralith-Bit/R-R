@@ -294,6 +294,7 @@ const PAGE_CONTENT = {
       body: "We offer competitive pricing for retailers and distributors across Nepal.",
       button1Text: "Become a Distributor",
       button2Text: "Chat on WhatsApp",
+      image: "/images/hero/kushal namkeen backgraound CTA.png",
       badges: ["Nationwide Delivery", "FSSAI Certified", "Consistent Quality"],
     },
     capabilities: {
@@ -318,6 +319,9 @@ const PAGE_CONTENT = {
   },
 
   shared: {
+    branding: {
+      logo: "/images/Logo.png",
+    },
     footer: {
       tagline: "Bringing the authentic taste of Nepal to your home with our premium quality snacks, tasty noodles and namkeen.",
       socialFacebook: "https://facebook.com",

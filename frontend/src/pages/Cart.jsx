@@ -8,7 +8,8 @@ import Seo from "../components/Seo";
 
 export default function Cart() {
   const { items, subtotal, increaseQty, decreaseQty, removeItem, clearCart } = useCart();
-  const { settings } = useCatalog();
+  const { settings, pages } = useCatalog();
+  const productsHero = (pages.products || {}).hero || {};
   const navigate = useNavigate();
 
   const [delivery, setDelivery] = useState({
@@ -67,7 +68,7 @@ export default function Cart() {
           breadcrumb="HOME &gt; Your Cart"
           title="Review Your Cart"
           subtitle="Review your selected items before placing your order."
-bgImage="/images/productswishlisthero.png"
+          bgImage={productsHero.bgImage || "/images/productswishlisthero.png"}
           mobileBgImage="/images/hero/home hero aone chips green.png"
         />
         <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
@@ -115,7 +116,7 @@ bgImage="/images/productswishlisthero.png"
         breadcrumb="HOME &gt; Your Cart"
         title="Review Your Cart"
         subtitle="Review your selected items before placing your order."
-        bgImage="/images/productswishlisthero.png"
+        bgImage={productsHero.bgImage || "/images/productswishlisthero.png"}
         mobileBgImage="/images/hero/home hero aone chips green.png"
       />
       <div className="container cart-layout" style={{ paddingTop: 60, paddingBottom: 60 }}>

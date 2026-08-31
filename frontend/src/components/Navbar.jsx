@@ -14,6 +14,7 @@ export default function Navbar() {
   const { count } = useWishlist();
   const { pages, settings } = useCatalog();
   const navData = (pages.shared || {}).navbar || {};
+  const branding = (pages.shared || {}).branding || {};
   const whatsAppNumber = settings?.whatsappNumber || "9779857021032";
 
   useEffect(() => {
@@ -27,10 +28,10 @@ export default function Navbar() {
 
   function handleSearch(e) {
     e.preventDefault();
-    if (query.trim()) {
-      navigate(`/products?search=${encodeURIComponent(query.trim())}`);
-      setMenuOpen(false);
-    }
+    const params = new URLSearchParams();
+    if (query.trim()) params.set("search", query.trim());
+    navigate({ pathname: "/products", search: params.toString() });
+    setMenuOpen(false);
   }
 
   function closeMenu() {
@@ -41,7 +42,7 @@ export default function Navbar() {
     <header className={`navbar ${scrolled ? "is-scrolled" : ""}`}>
       <div className="container navbar-inner">
         <NavLink to="/" className="brand" onClick={closeMenu}>
-          <img src="/images/Logo.png" alt="Riya & Rakshya logo" className="brand-logo" />
+          <img src={branding.logo || "/images/Logo.png"} alt="Riya & Rakshya logo" className="brand-logo" />
           <span className="brand-text">
             Riya &amp; Rakshya
             <small>Food products</small>

@@ -7,6 +7,13 @@ import { categoryMatches } from "../utils/catalogHelpers";
 import PageHero from "../components/PageHero";
 import Seo from "../components/Seo";
 
+function normaliseSearchText(value) {
+  return String(value ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase();
+}
+
 export default function Products() {
   const { products, categoryGroups, allSelectableLabels, settings, pages } = useCatalog();
   const productsHero = (pages.products || {}).hero || {};
@@ -25,6 +32,7 @@ export default function Products() {
     setSearch(searchParams.get("search") || "");
     const cat = searchParams.get("category");
     if (cat && allSelectableLabels.includes(cat)) setActiveFilter(cat);
+    else setActiveFilter("All Products");
   }, [searchParams, allSelectableLabels]);
 
   useEffect(() => {
@@ -51,13 +59,17 @@ export default function Products() {
       list = list.filter((p) => categoryMatches(p.category, activeFilter, categoryGroups));
     }
     if (search.trim()) {
-      const q = search.toLowerCase();
-      list = list.filter(
-        (p) =>
-          p.name.toLowerCase().includes(q) ||
-          p.category.toLowerCase().includes(q) ||
-          (p.description || "").toLowerCase().includes(q)
-      );
+      // Match every word across the searchable product details. This makes
+      // searches forgiving for punctuation, case, accents and phrases.
+      const terms = normaliseSearchText(search).trim().split(/\s+/).filter(Boolean);
+      list = list.filter((p) => {
+        const searchable = normaliseSearchText([
+          p.name, p.category, p.description, p.badge, p.ingredients, p.unit,
+          ...(p.sizes || []),
+          ...(p.sizeOptions || []).flatMap((size) => [size?.size, size?.price]),
+        ].join(" "));
+        return terms.every((term) => searchable.includes(term));
+      });
     }
     return list;
   }, [products, categoryGroups, activeFilter, search]);

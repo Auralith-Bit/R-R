@@ -6,6 +6,7 @@ import { useCatalog } from "../context/CatalogContext";
 export default function Footer() {
   const { categories, categoryGroups, settings, pages } = useCatalog();
   const footerData = (pages.shared || {}).footer || {};
+  const branding = (pages.shared || {}).branding || {};
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -22,7 +23,7 @@ export default function Footer() {
       <div className="container footer-grid">
         <div>
           <div className="brand" style={{ marginBottom: 12 }}>
-            <img src="/images/Logo.png" alt="Riya & Rakshya logo" className="brand-logo" />
+            <img src={branding.logo || "/images/Logo.png"} alt="Riya & Rakshya logo" className="brand-logo" />
             <span className="brand-text" style={{ color: "#f0b90b" }}>
               Riya &amp; Rakshya
               <small style={{ color: "#d99a00" }}>Food products</small>

@@ -58,7 +58,9 @@ const PagesTab = (() => {
     el.querySelector("#page-form").onsubmit = async (e) => {
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
-      const payload = collectFormData(e.target);
+      // Merge the submitted fields into the existing page. This preserves
+      // content that a page renders but does not expose as a form field.
+      const payload = mergeNested(allPages[activePage] || {}, collectFormData(e.target));
       await UI.withBusy(btn, async () => {
         try {
           allPages[activePage] = payload;
@@ -69,6 +71,7 @@ const PagesTab = (() => {
         }
       });
     };
+    wireImageUploads(el.querySelector("#page-form"));
   }
 
   function collectFormData(form) {
@@ -106,11 +109,113 @@ const PagesTab = (() => {
     cur[parts[parts.length - 1]] = val;
   }
 
+  function mergeNested(existing, changes) {
+    const result = { ...existing };
+    Object.entries(changes).forEach(([key, value]) => {
+      const canMerge = value && typeof value === "object" && !Array.isArray(value)
+        && existing?.[key] && typeof existing[key] === "object" && !Array.isArray(existing[key]);
+      result[key] = canMerge ? mergeNested(existing[key], value) : value;
+    });
+    return result;
+  }
+
   function txt(label, path, data, opts = {}) {
     const val = getNested(data, path) || "";
     return `<label>${label}
       <input type="text" data-field="${path}" value="${UI.escapeHtml(val)}" ${opts.hint ? `placeholder="${opts.hint}"` : ""} />
     </label>`;
+  }
+
+  // Page images use the same authenticated uploader as product photos.  A URL
+  // can still be pasted manually, which is useful for an already-hosted image.
+  function image(label, path, data, opts = {}) {
+    const val = getNested(data, path) || "";
+    return `<div class="full page-image-field" data-image-path="${path}">
+      <label>${label}
+        <input type="text" data-field="${path}" data-image-value value="${UI.escapeHtml(val)}" placeholder="${opts.hint || "/uploads/your-image.png"}" />
+      </label>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:7px;flex-wrap:wrap;">
+        <input type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" data-image-input hidden />
+        <button type="button" class="btn btn-secondary" data-image-trigger>Upload image</button>
+        <img data-image-preview src="${UI.escapeHtml(val)}" alt="" ${val ? "" : "hidden"} style="width:88px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--border-color);" />
+        <span class="hint" data-image-status>${val ? "Current image" : "Choose an image up to 8 MB"}</span>
+      </div>
+    </div>`;
+  }
+
+  function imageList(label, path, data) {
+    const arr = getNested(data, path) || [];
+    const val = Array.isArray(arr) ? arr.join("\n") : "";
+    return `<div class="full page-image-field" data-image-list-path="${path}">
+      <label>${label} <span class="hint">(one image per line)</span>
+        <textarea data-field-array="${path}" data-image-list-value rows="4" style="width:100%;padding:9px 11px;border:1px solid var(--border-color);border-radius:8px;font-size:14px;font-family:inherit;resize:vertical;">${UI.escapeHtml(val)}</textarea>
+      </label>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:7px;flex-wrap:wrap;">
+        <input type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" data-image-list-input multiple hidden />
+        <button type="button" class="btn btn-secondary" data-image-list-trigger>Upload image(s)</button>
+        <span class="hint" data-image-list-status>Choose one or more images up to 8 MB each</span>
+      </div>
+    </div>`;
+  }
+
+  function wireImageUploads(form) {
+    form.querySelectorAll(".page-image-field[data-image-path]").forEach((field) => {
+      const fileInput = field.querySelector("[data-image-input]");
+      const trigger = field.querySelector("[data-image-trigger]");
+      const valueInput = field.querySelector("[data-image-value]");
+      const preview = field.querySelector("[data-image-preview]");
+      const status = field.querySelector("[data-image-status]");
+      trigger.onclick = () => fileInput.click();
+      valueInput.oninput = () => {
+        preview.src = valueInput.value;
+        preview.hidden = !valueInput.value;
+      };
+      fileInput.onchange = async () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        trigger.disabled = true;
+        status.textContent = "Uploading…";
+        try {
+          const { url } = await Api.uploadImage(file);
+          valueInput.value = url;
+          preview.src = url;
+          preview.hidden = false;
+          status.textContent = "Uploaded — save the page to publish it.";
+        } catch (err) {
+          status.textContent = err.message;
+          UI.toast(err.message, true);
+        } finally {
+          trigger.disabled = false;
+          fileInput.value = "";
+        }
+      };
+    });
+
+    form.querySelectorAll(".page-image-field[data-image-list-path]").forEach((field) => {
+      const fileInput = field.querySelector("[data-image-list-input]");
+      const trigger = field.querySelector("[data-image-list-trigger]");
+      const valueInput = field.querySelector("[data-image-list-value]");
+      const status = field.querySelector("[data-image-list-status]");
+      trigger.onclick = () => fileInput.click();
+      fileInput.onchange = async () => {
+        const files = [...fileInput.files];
+        if (!files.length) return;
+        trigger.disabled = true;
+        status.textContent = "Uploading…";
+        try {
+          const urls = [];
+          for (const file of files) urls.push((await Api.uploadImage(file)).url);
+          valueInput.value = [valueInput.value.trim(), ...urls].filter(Boolean).join("\n");
+          status.textContent = `${urls.length} image${urls.length === 1 ? "" : "s"} uploaded — save the page to publish.`;
+        } catch (err) {
+          status.textContent = err.message;
+          UI.toast(err.message, true);
+        } finally {
+          trigger.disabled = false;
+          fileInput.value = "";
+        }
+      };
+    });
   }
 
   function area(label, path, data, opts = {}) {
@@ -174,7 +279,7 @@ const PagesTab = (() => {
         ${txt("Button 1 Link", "hero.cta1Link", d)}
         ${txt("Button 2 Text", "hero.cta2Text", d)}
         ${txt("Button 2 Link", "hero.cta2Link", d)}
-        ${listArea("Hero Slide Images (one path per line)", "hero.slides", d)}
+        ${imageList("Hero Slide Images", "hero.slides", d)}
       </div>
 
       ${sectionHead("New Arrivals Section")}
@@ -187,12 +292,11 @@ const PagesTab = (() => {
       <div class="form-grid">
         ${txt("Section Tag", "story.tag", d)}
         ${txt("Heading", "story.heading", d)}
-        ${txt("Image Path", "story.image", d)}
+        ${image("Story Image", "story.image", d)}
         ${txt("CTA Text", "story.ctaText", d)}
       </div>
       ${listArea("Body Paragraphs", "story.body", d)}
-      ${listArea("Feature Titles (one per line)", "story._featureTitles", d)}
-      ${listArea("Feature Descriptions (one per line)", "story._featureDescs", d)}
+      ${listAreaObjects("Features", "story.features", d)}
 
       ${sectionHead("Featured Products Section")}
       <div class="form-grid">
@@ -208,7 +312,7 @@ const PagesTab = (() => {
       <div class="form-grid">
         ${txt("Section Tag", "aboutStory.tag", d)}
         ${txt("Heading", "aboutStory.heading", d)}
-        ${txt("Image Path", "aboutStory.image", d)}
+        ${image("Story Image", "aboutStory.image", d)}
         ${txt("CTA Text", "aboutStory.ctaText", d)}
       </div>
       ${listArea("Body Paragraphs", "aboutStory.body", d)}
@@ -254,14 +358,14 @@ const PagesTab = (() => {
         ${txt("Breadcrumb", "hero.breadcrumb", d)}
         ${txt("Title", "hero.title", d)}
         ${txt("Subtitle", "hero.subtitle", d)}
-        ${txt("Background Image", "hero.bgImage", d)}
+        ${image("Background Image", "hero.bgImage", d)}
       </div>
 
       ${sectionHead("Story Section")}
       <div class="form-grid">
         ${txt("Section Tag", "story.tag", d)}
         ${txt("Heading", "story.heading", d)}
-        ${txt("Image Path", "story.image", d)}
+        ${image("Story Image", "story.image", d)}
       </div>
       ${listArea("Body Paragraphs", "story.body", d)}
 
@@ -333,7 +437,7 @@ const PagesTab = (() => {
         ${txt("Breadcrumb", "hero.breadcrumb", d)}
         ${txt("Title", "hero.title", d)}
         ${txt("Subtitle", "hero.subtitle", d)}
-        ${txt("Background Image", "hero.bgImage", d)}
+        ${image("Background Image", "hero.bgImage", d)}
       </div>
 
       ${sectionHead("Contact Info Card")}
@@ -392,7 +496,7 @@ const PagesTab = (() => {
         ${txt("Breadcrumb", "hero.breadcrumb", d)}
         ${txt("Title", "hero.title", d)}
         ${txt("Subtitle", "hero.subtitle", d)}
-        ${txt("Background Image", "hero.bgImage", d)}
+        ${image("Background Image", "hero.bgImage", d)}
       </div>
 
       ${sectionHead("Process Steps Section")}
@@ -407,7 +511,7 @@ const PagesTab = (() => {
         ${txt("Section Tag", "facility.tag", d)}
         ${txt("Heading", "facility.heading", d)}
         ${txt("Body", "facility.body", d)}
-        ${txt("Image Path", "facility.image", d)}
+        ${image("Facility Image", "facility.image", d)}
       </div>
       ${listAreaObjects("Features (format: title|description)", "facility.features", d)}
 
@@ -416,7 +520,10 @@ const PagesTab = (() => {
         ${txt("Heading", "cta.heading", d)}
         ${txt("Body", "cta.body", d)}
         ${txt("Button 1 Text", "cta.button1Text", d)}
+        ${txt("Button 1 Link", "cta.button1Link", d)}
         ${txt("Button 2 Text", "cta.button2Text", d)}
+        ${txt("Button 2 Link", "cta.button2Link", d)}
+        ${image("CTA Background Image", "cta.image", d)}
         ${listArea("Badges (one per line)", "cta.badges", d)}
       </div>
 
@@ -437,7 +544,7 @@ const PagesTab = (() => {
         ${txt("Breadcrumb", "hero.breadcrumb", d)}
         ${txt("Title", "hero.title", d)}
         ${txt("Subtitle", "hero.subtitle", d)}
-        ${txt("Background Image", "hero.bgImage", d)}
+        ${image("Background Image", "hero.bgImage", d)}
       </div>
     `;
   }
@@ -447,6 +554,7 @@ const PagesTab = (() => {
     return `
       ${sectionHead("Footer")}
       <div class="form-grid">
+        ${image("Site Logo", "branding.logo", d)}
         ${txt("Tagline", "footer.tagline", d)}
         ${txt("Facebook URL", "footer.socialFacebook", d)}
         ${txt("Instagram URL", "footer.socialInstagram", d)}

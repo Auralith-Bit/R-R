@@ -12,7 +12,8 @@ import Seo from "../components/Seo";
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { products, settings } = useCatalog();
+  const { products, settings, pages } = useCatalog();
+  const productsHero = (pages.products || {}).hero || {};
   const product = getProductById(products, id);
   const { addItem } = useCart();
   const [size, setSize] = useState(defaultSize(product));
@@ -60,7 +61,7 @@ export default function ProductDetail() {
         breadcrumb={`HOME > PRODUCTS > ${product.category.toUpperCase()}`}
         title={product.name}
         subtitle={product.description?.slice(0, 120)}
-        bgImage="/images/productswishlisthero.png"
+        bgImage={productsHero.bgImage || "/images/productswishlisthero.png"}
       />
 
       <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>

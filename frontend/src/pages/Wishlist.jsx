@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiHeart, FiTrash2, FiArrowRight } from "react-icons/fi";
 import { useWishlist } from "../context/WishlistContext";
+import { useCatalog } from "../context/CatalogContext";
 import PageHero from "../components/PageHero";
 import Seo from "../components/Seo";
 
 export default function Wishlist() {
   const { items, removeFromWishlist } = useWishlist();
+  const { pages } = useCatalog();
+  const productsHero = (pages.products || {}).hero || {};
   const [imgErrors, setImgErrors] = useState({});
 
   return (
@@ -16,7 +19,7 @@ export default function Wishlist() {
         breadcrumb="HOME &gt; Wishlist"
         title="Your Wishlist"
         subtitle="Keep track of your favorite snacks and treats, discover new flavors you'll love, and never miss out."
-        bgImage="/images/productswishlisthero.png"
+        bgImage={productsHero.bgImage || "/images/productswishlisthero.png"}
         mobileBgImage="/images/hero/home hero kushal namkeen.png"
       />
 
