@@ -11,7 +11,60 @@ function normaliseSearchText(value) {
   return String(value ?? "")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLocaleLowerCase();
+    .toLocaleLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+}
+
+function searchTokens(value) {
+  return normaliseSearchText(value).split(/\s+/).filter(Boolean);
+}
+
+function editDistance(a, b) {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+  const previous = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let diagonal = previous[0];
+    previous[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const above = previous[j];
+      previous[j] = Math.min(
+        previous[j] + 1,
+        previous[j - 1] + 1,
+        diagonal + (a[i - 1] === b[j - 1] ? 0 : 1)
+      );
+      diagonal = above;
+    }
+  }
+  return previous[b.length];
+}
+
+function productSearchScore(product, query) {
+  const name = normaliseSearchText(product.name);
+  const searchable = normaliseSearchText([
+    product.name, product.category, product.description, product.badge, product.ingredients, product.unit,
+    ...(product.sizes || []),
+    ...(product.sizeOptions || []).flatMap((size) => [size?.size, size?.price]),
+  ].join(" "));
+  const productTokens = searchTokens(searchable);
+  const terms = searchTokens(query);
+
+  let score = 0;
+  for (const term of terms) {
+    if (name.includes(term)) {
+      score += 30; // Product-name matches should be shown first.
+      continue;
+    }
+    const match = productTokens.find((token) =>
+      token.startsWith(term) || term.startsWith(token) ||
+      (term.length >= 4 && token.length >= 4 && editDistance(term, token) <= 1)
+    );
+    if (!match) return 0;
+    score += match === term ? 15 : 8;
+  }
+  return score;
 }
 
 export default function Products() {
@@ -46,8 +99,12 @@ export default function Products() {
 
   function selectFilter(f) {
     setActiveFilter(f);
+    setSearch("");
     setOpenDropdown(null);
     const next = new URLSearchParams(searchParams);
+    // A category selection is a new browse action, not a refinement of the
+    // last search. Remove it so the selected category displays its products.
+    next.delete("search");
     if (f === "All Products") next.delete("category");
     else next.set("category", f);
     setSearchParams(next, { replace: true });
@@ -59,17 +116,13 @@ export default function Products() {
       list = list.filter((p) => categoryMatches(p.category, activeFilter, categoryGroups));
     }
     if (search.trim()) {
-      // Match every word across the searchable product details. This makes
-      // searches forgiving for punctuation, case, accents and phrases.
-      const terms = normaliseSearchText(search).trim().split(/\s+/).filter(Boolean);
-      list = list.filter((p) => {
-        const searchable = normaliseSearchText([
-          p.name, p.category, p.description, p.badge, p.ingredients, p.unit,
-          ...(p.sizes || []),
-          ...(p.sizeOptions || []).flatMap((size) => [size?.size, size?.price]),
-        ].join(" "));
-        return terms.every((term) => searchable.includes(term));
-      });
+      // Token search ranks name matches first and accepts word prefixes and
+      // one-character typos (for example, "namken" finds "Namkeen").
+      list = list
+        .map((product) => ({ product, score: productSearchScore(product, search) }))
+        .filter(({ score }) => score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(({ product }) => product);
     }
     return list;
   }, [products, categoryGroups, activeFilter, search]);

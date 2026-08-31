@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiSearch, FiHeart, FiShoppingCart, FiMessageCircle, FiMenu, FiX } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
@@ -10,6 +10,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { totalCount } = useCart();
   const { count } = useWishlist();
   const { pages, settings } = useCatalog();
@@ -26,11 +27,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setQuery(new URLSearchParams(location.search).get("search") || "");
+  }, [location.search]);
+
   function handleSearch(e) {
     e.preventDefault();
     const params = new URLSearchParams();
     if (query.trim()) params.set("search", query.trim());
-    navigate({ pathname: "/products", search: params.toString() });
+    const search = params.toString();
+    navigate({ pathname: "/products", search: search ? `?${search}` : "" });
     setMenuOpen(false);
   }
 
