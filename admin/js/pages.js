@@ -72,6 +72,7 @@ const PagesTab = (() => {
       });
     };
     wireImageUploads(el.querySelector("#page-form"));
+    wireVideoUploads(el.querySelector("#page-form"));
   }
 
   function collectFormData(form) {
@@ -158,6 +159,21 @@ const PagesTab = (() => {
     </div>`;
   }
 
+  function video(label, path, data) {
+    const val = getNested(data, path) || "";
+    return `<div class="full page-video-field" data-video-path="${path}">
+      <label>${label}
+        <input type="text" data-field="${path}" data-video-value value="${UI.escapeHtml(val)}" placeholder="/uploads/your-video.mp4" />
+      </label>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:7px;flex-wrap:wrap;">
+        <input type="file" accept="video/mp4,video/webm,video/ogg" data-video-input hidden />
+        <button type="button" class="btn btn-secondary" data-video-trigger>Upload video</button>
+        <video data-video-preview controls muted preload="metadata" ${val ? "" : "hidden"} style="width:160px;height:90px;object-fit:cover;border-radius:6px;border:1px solid var(--border-color);"><source src="${UI.escapeHtml(val)}" /></video>
+        <span class="hint" data-video-status>${val ? "Current video" : "Choose an MP4, WebM or OGV video up to 100 MB"}</span>
+      </div>
+    </div>`;
+  }
+
   function wireImageUploads(form) {
     form.querySelectorAll(".page-image-field[data-image-path]").forEach((field) => {
       const fileInput = field.querySelector("[data-image-input]");
@@ -207,6 +223,42 @@ const PagesTab = (() => {
           for (const file of files) urls.push((await Api.uploadImage(file)).url);
           valueInput.value = [valueInput.value.trim(), ...urls].filter(Boolean).join("\n");
           status.textContent = `${urls.length} image${urls.length === 1 ? "" : "s"} uploaded — save the page to publish.`;
+        } catch (err) {
+          status.textContent = err.message;
+          UI.toast(err.message, true);
+        } finally {
+          trigger.disabled = false;
+          fileInput.value = "";
+        }
+      };
+    });
+  }
+
+  function wireVideoUploads(form) {
+    form.querySelectorAll(".page-video-field").forEach((field) => {
+      const fileInput = field.querySelector("[data-video-input]");
+      const trigger = field.querySelector("[data-video-trigger]");
+      const valueInput = field.querySelector("[data-video-value]");
+      const preview = field.querySelector("[data-video-preview]");
+      const source = preview.querySelector("source");
+      const status = field.querySelector("[data-video-status]");
+      function updatePreview(url) {
+        source.src = url;
+        preview.hidden = !url;
+        preview.load();
+      }
+      trigger.onclick = () => fileInput.click();
+      valueInput.oninput = () => updatePreview(valueInput.value);
+      fileInput.onchange = async () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        trigger.disabled = true;
+        status.textContent = "Uploading…";
+        try {
+          const { url } = await Api.uploadVideo(file);
+          valueInput.value = url;
+          updatePreview(url);
+          status.textContent = "Uploaded — save the page to publish it.";
         } catch (err) {
           status.textContent = err.message;
           UI.toast(err.message, true);
@@ -336,7 +388,7 @@ const PagesTab = (() => {
       <div class="form-grid">
         ${txt("Section Tag", "howWeMakeIt.tag", d)}
         ${txt("Heading", "howWeMakeIt.heading", d)}
-        ${txt("Video Path", "howWeMakeIt.video", d)}
+        ${video("Video", "howWeMakeIt.video", d)}
         ${txt("CTA Text", "howWeMakeIt.ctaText", d)}
       </div>
       ${listArea("Body Paragraphs", "howWeMakeIt.body", d)}
@@ -385,7 +437,7 @@ const PagesTab = (() => {
       <div class="form-grid">
         ${txt("Section Tag", "quality.tag", d)}
         ${txt("Heading", "quality.heading", d)}
-        ${txt("Video Path", "quality.video", d)}
+        ${video("Video", "quality.video", d)}
         ${listArea("Trust Tags", "quality.tags", d)}
       </div>
       ${listArea("Body Paragraphs", "quality.body", d)}
@@ -406,7 +458,7 @@ const PagesTab = (() => {
       <div class="form-grid">
         ${txt("Section Tag", "peopleBehindUs.tag", d)}
         ${txt("Heading", "peopleBehindUs.heading", d)}
-        ${txt("Video Path", "peopleBehindUs.video", d)}
+        ${video("Video", "peopleBehindUs.video", d)}
       </div>
       ${listArea("Body Paragraphs", "peopleBehindUs.body", d)}
 

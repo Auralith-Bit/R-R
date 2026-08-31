@@ -92,5 +92,10 @@ const Api = (() => {
       form.append("image", file);
       return request("/api/upload", { method: "POST", body: form, isForm: true });
     },
+    uploadVideo: (file) => {
+      const form = new FormData();
+      form.append("video", file);
+      return request("/api/upload/video", { method: "POST", body: form, isForm: true });
+    },
   };
 })();

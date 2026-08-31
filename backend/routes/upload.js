@@ -9,7 +9,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const UPLOAD_DIR = path.join(__dirname, "..", "uploads");
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
-const ALLOWED = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".avif"]);
+const ALLOWED_IMAGES = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".avif"]);
+const ALLOWED_VIDEOS = new Set([".mp4", ".webm", ".ogv"]);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, UPLOAD_DIR),
@@ -24,24 +25,37 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({
+function createUpload(allowedExtensions, maxSize, typeLabel) {
+  return multer({
   storage,
-  limits: { fileSize: 8 * 1024 * 1024 }, // 8MB
+  limits: { fileSize: maxSize },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
-    if (!ALLOWED.has(ext)) {
-      return cb(new Error("Only image files (png, jpg, webp, gif, avif) are allowed."));
+    if (!allowedExtensions.has(ext)) {
+      return cb(new Error(`Only ${typeLabel} files are allowed.`));
     }
     cb(null, true);
   },
-});
+  });
+}
+
+const uploadImage = createUpload(ALLOWED_IMAGES, 8 * 1024 * 1024, "image (png, jpg, webp, gif, avif)");
+const uploadVideo = createUpload(ALLOWED_VIDEOS, 100 * 1024 * 1024, "video (mp4, webm, ogv)");
 
 const router = Router();
 
 router.post("/", requireAuth, (req, res) => {
-  upload.single("image")(req, res, (err) => {
+  uploadImage.single("image")(req, res, (err) => {
     if (err) return res.status(400).json({ error: err.message });
     if (!req.file) return res.status(400).json({ error: "No image was uploaded." });
+    res.status(201).json({ url: `/uploads/${req.file.filename}` });
+  });
+});
+
+router.post("/video", requireAuth, (req, res) => {
+  uploadVideo.single("video")(req, res, (err) => {
+    if (err) return res.status(400).json({ error: err.message });
+    if (!req.file) return res.status(400).json({ error: "No video was uploaded." });
     res.status(201).json({ url: `/uploads/${req.file.filename}` });
   });
 });

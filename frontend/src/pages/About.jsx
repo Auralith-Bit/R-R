@@ -163,7 +163,7 @@ export default function About() {
         <div className="quality-grid">
           <div className="quality-image" style={{ background: "transparent" }}>
             <video autoPlay muted loop playsInline style={{ width: "100%", borderRadius: 18, display: "block" }}>
-              <source src={qualitySec.video || "/videos/RnR video.mp4"} type="video/mp4" />
+              <source src={qualitySec.video || "/videos/RnR video.mp4"} />
             </video>
           </div>
           <div>
@@ -233,7 +233,7 @@ export default function About() {
         <div className="about-story-grid" style={{ alignItems: "center" }}>
           <div className="quality-image">
             <video autoPlay muted loop playsInline style={{ width: "100%", borderRadius: 18 }}>
-              <source src={peopleSec.video || "/videos/the people behind us.mp4"} type="video/mp4" />
+              <source src={peopleSec.video || "/videos/the people behind us.mp4"} />
             </video>
           </div>
           <div style={{ background: "#fff", borderRadius: 16, padding: 32, boxShadow: "0 4px 20px rgba(0,0,0,0.06)", border: "1px solid rgba(0,0,0,0.04)" }}>
