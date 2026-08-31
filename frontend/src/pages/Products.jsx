@@ -76,7 +76,7 @@ export default function Products() {
         bgImage={productsHero.bgImage || "/images/productswishlisthero.png"}
       />
 
-      <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
+      <div className="container products-page" style={{ paddingTop: 60, paddingBottom: 60 }}>
         <div className="products-toolbar">
           <div className="filter-row">
             {categoryGroups.map((g) => {

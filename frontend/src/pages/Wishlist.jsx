@@ -17,6 +17,7 @@ export default function Wishlist() {
         title="Your Wishlist"
         subtitle="Keep track of your favorite snacks and treats, discover new flavors you'll love, and never miss out."
         bgImage="/images/productswishlisthero.png"
+        mobileBgImage="/images/hero/home hero kushal namkeen.png"
       />
 
       <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>

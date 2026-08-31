@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiTrash2, FiArrowLeft, FiMessageCircle, FiFileText } from "react-icons/fi";
+import { FiTrash2, FiArrowLeft, FiArrowRight, FiMessageCircle, FiFileText, FiShoppingCart } from "react-icons/fi";
 import { useCart } from "../context/CartContext";
 import { useCatalog } from "../context/CatalogContext";
 import PageHero from "../components/PageHero";
@@ -68,15 +68,41 @@ export default function Cart() {
           title="Review Your Cart"
           subtitle="Review your selected items before placing your order."
 bgImage="/images/productswishlisthero.png"
+          mobileBgImage="/images/hero/home hero aone chips green.png"
         />
-        <div className="container" style={{ paddingTop: 60, paddingBottom: 60, textAlign: "center" }}>
-          <h2>Your cart is empty</h2>
-          <p style={{ color: "var(--text-muted)" }}>
-            Browse our products and add your favorite snacks to the cart.
-          </p>
-          <Link to="/products" className="btn btn-red">
-            Browse Products
-          </Link>
+        <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
+          <div
+            style={{
+              background: "#fff",
+              borderRadius: 16,
+              padding: "80px 30px",
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: "50%",
+                background: "#fde3e3",
+                color: "var(--red)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 20px",
+                fontSize: 32,
+              }}
+            >
+              <FiShoppingCart />
+            </div>
+            <h2 style={{ marginBottom: 10 }}>Your cart is empty</h2>
+            <p style={{ color: "var(--text-muted)", maxWidth: 420, margin: "0 auto 24px" }}>
+              Browse our products and add your favorite snacks to the cart.
+            </p>
+            <Link to="/products" className="btn btn-red">
+              Browse Products <FiArrowRight />
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -90,6 +116,7 @@ bgImage="/images/productswishlisthero.png"
         title="Review Your Cart"
         subtitle="Review your selected items before placing your order."
         bgImage="/images/productswishlisthero.png"
+        mobileBgImage="/images/hero/home hero aone chips green.png"
       />
       <div className="container cart-layout" style={{ paddingTop: 60, paddingBottom: 60 }}>
         <div style={{ background: "#fff", borderRadius: 16, padding: 26 }}>

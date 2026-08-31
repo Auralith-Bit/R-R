@@ -5,13 +5,22 @@ import React, { useState } from "react";
  * Pass a bgImage prop to use a single static background image instead of the
  * default slideshow.
  */
-export default function PageHero({ breadcrumb, title, subtitle, bgImage }) {
+export default function PageHero({ breadcrumb, title, subtitle, bgImage, mobileBgImage, mobilePosition }) {
   const [heroImgError, setHeroImgError] = useState(false);
+
+  const staticClass = mobilePosition
+    ? `page-hero-v2-static page-hero-v2-static-${mobilePosition}`
+    : "page-hero-v2-static";
 
   return (
     <section className="page-hero-v2">
       {bgImage ? (
-        <div className="page-hero-v2-static" style={{ backgroundImage: `url("${bgImage}")` }} />
+        <>
+          <div className={staticClass} style={{ backgroundImage: `url("${bgImage}")` }} />
+          {mobileBgImage && (
+            <div className="page-hero-v2-static-mobile" style={{ backgroundImage: `url("${mobileBgImage}")` }} />
+          )}
+        </>
       ) : (
         <div className="page-hero-v2-slides">
           <div className="page-hero-v2-slide page-hero-v2-slide-1">

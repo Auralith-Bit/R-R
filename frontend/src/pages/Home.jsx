@@ -46,9 +46,9 @@ export default function Home() {
 
   const whatsAppNumber = settings?.whatsappNumber || "9779820299711";
   const defaultStats = [
-    ["500+", "Happy Retailers", "var(--red)"],
-    ["10+", "Product Lines", "var(--red)"],
-    ["77", "Districts", "var(--red)"],
+    ["500+", "Happy Retailers", "var(--white)"],
+    ["10+", "Product Lines", "var(--white)"],
+    ["77", "Districts", "var(--white)"],
   ];
   const heroStats = hero.stats || null;
 
@@ -85,7 +85,9 @@ export default function Home() {
               return (
                 <React.Fragment key={val[1]}>
                   <div className="home-hero__stat">
-                    <span className="home-hero__stat-num" style={{ color: "var(--red)" }}>{val[0]}</span>
+                    <span className="home-hero__stat-num text-[var(--white)] lg:text-[var(--red)]">
+                      {val[0]}
+                    </span>
                     <span className="home-hero__stat-label">{val[1]}</span>
                   </div>
                   {i < arr.length - 1 && <div className="home-hero__stat-divider" />}
@@ -135,64 +137,64 @@ export default function Home() {
 
       <section style={{ background: "#FDF5F5", padding: "60px 0" }}>
         <div className="container">
-        <div className="about-story-grid" style={{ alignItems: "stretch" }}>
-          <img
-            src={encodeURI(storySec.image || "/images/home page below new arrivals.png")}
-            alt="R&R production facility"
-            loading="lazy"
-            decoding="async"
-            style={{ borderRadius: 16, width: "100%", height: "100%", objectFit: "cover" }}
-          />
-          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "8px 0" }}>
-            <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 4, fontSize: 13 }}>
-              {storySec.tag || "HEALTHY LIVING"}
-            </p>
-            <h2 style={{ marginTop: 0, marginBottom: 8, fontSize: "clamp(22px, 2.5vw, 32px)" }}>{storySec.heading || "Nepal's Most Trusted Snack Brand"}</h2>
-            <p style={{ lineHeight: 1.7, color: "var(--text-muted)", fontSize: 15, marginBottom: 16, marginTop: 0 }}>
-              {storySec.body?.[0] || "Crafted with care using premium ingredients in our state-of-the-art facility."}
-            </p>
-            <div className="home-story-features-grid">
-              {(storySec.features || [
-                { title: "100% Vegetarian", desc: "Plant-based ingredients for a guilt-free snack." },
-                { title: "Premium Quality", desc: "Finest raw materials for authentic taste." },
-                { title: "Fast Delivery", desc: "Fresh snacks delivered on time, nationwide." },
-                { title: "Trusted Brand", desc: "Loved by families across all 77 districts." },
-              ]).map((item, i) => {
-                const icons = [<FiCheck />, <FiStar />, <FiZap />, <FiHeart />];
-                return (
-                  <div
-                    key={item.title}
-                    style={{
-                      background: "#fff",
-                      borderRadius: 12,
-                      padding: "12px",
-                      border: "1px solid var(--border-color)",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-                    }}
-                  >
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                      <span
-                        style={{
-                          width: 28, height: 28, borderRadius: 8,
-                          background: "var(--cream)", color: "var(--red)",
-                          display: "flex", alignItems: "center", justifyContent: "center",
-                          flexShrink: 0, fontSize: 13,
-                        }}
-                      >
-                        {icons[i] || <FiCheck />}
-                      </span>
-                      <strong style={{ fontSize: 13 }}>{item.title}</strong>
+          <div className="about-story-grid" style={{ alignItems: "stretch" }}>
+            <img
+              src={encodeURI(storySec.image || "/images/home page below new arrivals.png")}
+              alt="R&R production facility"
+              loading="lazy"
+              decoding="async"
+              style={{ borderRadius: 16, width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "8px 0" }}>
+              <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 4, fontSize: 13 }}>
+                {storySec.tag || "HEALTHY LIVING"}
+              </p>
+              <h2 style={{ marginTop: 0, marginBottom: 8, fontSize: "clamp(22px, 2.5vw, 32px)" }}>{storySec.heading || "Nepal's Most Trusted Snack Brand"}</h2>
+              <p style={{ lineHeight: 1.7, color: "var(--text-muted)", fontSize: 15, marginBottom: 16, marginTop: 0 }}>
+                {storySec.body?.[0] || "Crafted with care using premium ingredients in our state-of-the-art facility."}
+              </p>
+              <div className="home-story-features-grid">
+                {(storySec.features || [
+                  { title: "100% Vegetarian", desc: "Plant-based ingredients for a guilt-free snack." },
+                  { title: "Premium Quality", desc: "Finest raw materials for authentic taste." },
+                  { title: "Fast Delivery", desc: "Fresh snacks delivered on time, nationwide." },
+                  { title: "Trusted Brand", desc: "Loved by families across all 77 districts." },
+                ]).map((item, i) => {
+                  const icons = [<FiCheck />, <FiStar />, <FiZap />, <FiHeart />];
+                  return (
+                    <div
+                      key={item.title}
+                      style={{
+                        background: "#fff",
+                        borderRadius: 12,
+                        padding: "12px",
+                        border: "1px solid var(--border-color)",
+                        boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                        <span
+                          style={{
+                            width: 28, height: 28, borderRadius: 8,
+                            background: "var(--cream)", color: "var(--red)",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            flexShrink: 0, fontSize: 13,
+                          }}
+                        >
+                          {icons[i] || <FiCheck />}
+                        </span>
+                        <strong style={{ fontSize: 13 }}>{item.title}</strong>
+                      </div>
+                      <p style={{ margin: 0, fontSize: 12, lineHeight: 1.4, color: "var(--text-muted)" }}>{item.desc}</p>
                     </div>
-                    <p style={{ margin: 0, fontSize: 12, lineHeight: 1.4, color: "var(--text-muted)" }}>{item.desc}</p>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+              <Link to="/about" className="btn btn-red" style={{ marginTop: 24, alignSelf: "flex-start" }}>
+                {storySec.ctaText || "Learn more about us"} <FiArrowRight />
+              </Link>
             </div>
-            <Link to="/about" className="btn btn-red" style={{ marginTop: 24, alignSelf: "flex-start" }}>
-              {storySec.ctaText || "Learn more about us"} <FiArrowRight />
-            </Link>
           </div>
-        </div>
         </div>
       </section>
 
@@ -250,30 +252,30 @@ export default function Home() {
 
       <section style={{ background: "#f7f2eb", padding: "60px 0" }}>
         <div className="container">
-        <div className="about-story-grid" style={{ alignItems: "stretch" }}>
-          <img
-            src={encodeURI(aboutStorySec.image || "/images/abouthome.png")}
-            alt="The R&R Story"
-            loading="lazy"
-            decoding="async"
-            style={{ borderRadius: 16, width: "100%", height: "100%", objectFit: "cover" }}
-          />
-          <div>
-            <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 6 }}>
-              {aboutStorySec.tag || "ABOUT US"}
-            </p>
-            <h2 style={{ marginTop: 0 }}>{aboutStorySec.heading || "The R&R Story"}</h2>
-            {(aboutStorySec.body || [
-              "We started with one goal: make snacks that are fast, tasty, and satisfying. From our kitchen to your table, every bite is crafted with care, using quality ingredients and attention to detail. We believe that great taste comes from consistency and passion in every step of the process.",
-              "Today, Riya and Rakshya Food Products manufactures over 60 varieties of instant noodles, namkeen, dalmot, chips and bhujiya — loved by thousands across Nepal.",
-            ]).map((para, i) => (
-              <p key={i} style={{ lineHeight: 1.7, color: "var(--text-muted)" }}>{para}</p>
-            ))}
-            <Link to="/about" className="btn btn-red" style={{ marginTop: 16 }}>
-              {aboutStorySec.ctaText || "Learn more about us"} <FiArrowRight />
-            </Link>
+          <div className="about-story-grid" style={{ alignItems: "stretch" }}>
+            <img
+              src={encodeURI(aboutStorySec.image || "/images/abouthome.png")}
+              alt="The R&R Story"
+              loading="lazy"
+              decoding="async"
+              style={{ borderRadius: 16, width: "100%", height: "100%", objectFit: "cover" }}
+            />
+            <div>
+              <p style={{ color: "var(--red)", fontWeight: 700, marginBottom: 6 }}>
+                {aboutStorySec.tag || "ABOUT US"}
+              </p>
+              <h2 style={{ marginTop: 0 }}>{aboutStorySec.heading || "The R&R Story"}</h2>
+              {(aboutStorySec.body || [
+                "We started with one goal: make snacks that are fast, tasty, and satisfying. From our kitchen to your table, every bite is crafted with care, using quality ingredients and attention to detail. We believe that great taste comes from consistency and passion in every step of the process.",
+                "Today, Riya and Rakshya Food Products manufactures over 60 varieties of instant noodles, namkeen, dalmot, chips and bhujiya — loved by thousands across Nepal.",
+              ]).map((para, i) => (
+                <p key={i} style={{ lineHeight: 1.7, color: "var(--text-muted)" }}>{para}</p>
+              ))}
+              <Link to="/about" className="btn btn-red" style={{ marginTop: 16 }}>
+                {aboutStorySec.ctaText || "Learn more about us"} <FiArrowRight />
+              </Link>
+            </div>
           </div>
-        </div>
         </div>
       </section>
 
@@ -351,14 +353,14 @@ export default function Home() {
               </Link>
             </div>
             <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.1)", background: "#f5f5f5", border: "1px solid var(--border-color)", display: "flex" }}>
-                <video
-                  src={howWeMakeItSec.video || "/videos/RnR video.mp4"}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                />
+              <video
+                src={howWeMakeItSec.video || "/videos/RnR video.mp4"}
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
             </div>
           </div>
         </div>

@@ -65,6 +65,7 @@ export default function About() {
         title={hero.title || "About Riya & Rakshya Food Products"}
         subtitle={hero.subtitle || "From a small kitchen dream to Nepal's beloved snack brand — here's our story."}
         bgImage={hero.bgImage || "/images/aboutherosection.png"}
+        mobilePosition="right"
       />
 
       <div className="container" style={{ paddingTop: 60, paddingBottom: 60 }}>
