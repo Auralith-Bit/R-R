@@ -54,7 +54,7 @@ export default function About() {
   ];
 
   return (
-    <div>
+    <div className="about-page">
       <Seo
         title={hero.title || "About Us"}
         description="Learn about R&R Food Products (Riya and Rakshya Food Products) — a Nepali snack manufacturer based in Bhairahawa, crafting authentic namkeen, chips and noodles."

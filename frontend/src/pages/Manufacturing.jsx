@@ -47,7 +47,7 @@ export default function Manufacturing() {
   const facilityFeatures = facilitySec.features || defaultFacilityFeatures;
 
   return (
-    <div>
+    <div className="manufacturing-page">
       <Seo
         title={hero.title || "Manufacturing Process"}
         description="See how R&R Food Products (Riya and Rakshya Food Products) makes its snacks — from quality ingredient sourcing to FSSAI-certified packaging in Bhairahawa, Nepal."
@@ -107,11 +107,12 @@ export default function Manufacturing() {
           <div className="facility-grid" style={{ alignItems: "stretch" }}>
             <div>
               <img
+                className="facility-photo"
                 src={encodeURI(facilitySec.image || "/images/manufacturingquality.png")}
                 alt="Manufacturing Facility"
                 loading="lazy"
                 decoding="async"
-                style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
+                style={{ width: "100%", borderRadius: 16, boxShadow: "var(--shadow-lg)" }}
               />
             </div>
             <div>

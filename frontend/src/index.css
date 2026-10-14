@@ -2849,3 +2849,154 @@ textarea {
     padding: 20px !important;
   }
 }
+
+/* Mobile layout refinements for the About and Manufacturing pages. */
+.manufacturing-page .facility-photo {
+  height: 100%;
+  min-height: 360px;
+  max-height: 520px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .about-page,
+  .manufacturing-page {
+    overflow-x: clip;
+  }
+
+  .about-page .about-story-grid,
+  .about-page .quality-grid,
+  .about-page .cta-split-grid,
+  .manufacturing-page .facility-grid,
+  .manufacturing-page .why-choose-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .about-page .about-story-grid > *,
+  .about-page .quality-grid > *,
+  .about-page .cta-split-grid > *,
+  .manufacturing-page .facility-grid > *,
+  .manufacturing-page .why-choose-grid > * {
+    min-width: 0;
+  }
+
+  .about-page h2,
+  .manufacturing-page h2,
+  .manufacturing-page h3,
+  .manufacturing-page h4 {
+    overflow-wrap: anywhere;
+  }
+
+  .about-page .mission-card {
+    min-height: 0;
+    padding: 26px 22px;
+  }
+
+  .about-page .mission-card p {
+    margin: 16px 0 !important;
+    line-height: 1.7 !important;
+  }
+
+  .about-page .cta-split-grid > div:last-child,
+  .manufacturing-page .why-choose-grid > div:last-child {
+    padding: 24px !important;
+  }
+
+  .manufacturing-page .process-steps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    margin-top: 24px !important;
+  }
+
+  .manufacturing-page .process-steps-grid > div {
+    min-height: 0 !important;
+    padding: 16px 12px !important;
+  }
+
+  .manufacturing-page .facility-photo {
+    height: auto;
+    min-height: 0;
+    max-height: 360px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .manufacturing-page .mfg-cta-content > div:last-child > div:last-child {
+    gap: 8px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-page .mission-vision-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .about-page .manufacture-grid,
+  .about-page .scale-grid,
+  .about-page .advantages-grid,
+  .about-page .team-grid,
+  .manufacturing-page .manufacturing-why-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .about-page .team-grid {
+    padding: 28px 0;
+  }
+
+  .about-page .team-grid > div,
+  .about-page .adv-card {
+    padding: 20px 12px !important;
+  }
+
+  .about-page .manufacture-tile {
+    aspect-ratio: 1 / 1;
+  }
+
+  .about-page .manufacture-overlay {
+    padding: 10px;
+  }
+
+  .about-page .manufacture-overlay h4 {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+
+  .about-page .cta-split-grid > div:last-child,
+  .manufacturing-page .why-choose-grid > div:last-child {
+    padding: 18px !important;
+  }
+
+  .manufacturing-page .process-steps-grid > div h3 {
+    font-size: 13px !important;
+  }
+
+  .manufacturing-page .process-steps-grid > div p {
+    font-size: 12px !important;
+  }
+
+  .manufacturing-page .mfg-cta-content {
+    padding: 28px 16px !important;
+  }
+
+  .manufacturing-page .mfg-cta-content a {
+    max-width: 100%;
+    min-height: 44px;
+    height: auto !important;
+    padding: 10px 16px !important;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .about-page .advantages-grid,
+  .about-page .team-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .manufacturing-page .process-steps-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
