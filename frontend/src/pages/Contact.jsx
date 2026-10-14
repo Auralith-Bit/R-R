@@ -276,7 +276,7 @@ export default function Contact() {
             <p style={{ color: "var(--text-muted)" }}>
               {ctaSec.bulkBody || "We're always looking for retail partners and distributors across Nepal."}
             </p>
-            <div style={{ display: "flex", gap: 12 }}>
+            <div className="contact-cta-buttons" style={{ display: "flex", gap: 12 }}>
               <Link to="/about" className="btn btn-red">{ctaSec.bulkButton1 || "Learn more about us"}</Link>
               <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" className="btn btn-whatsapp">
                 <FiMessageCircle /> {ctaSec.bulkButton2 || "Contact Sales team"}
