@@ -250,31 +250,42 @@ export default function About() {
         </div>
       </div>
 
-      <div style={{ background: "linear-gradient(135deg, #C72D29, #D3A836)", padding: "48px 0" }}>
-        <div className="container cta-split-grid">
-          <div style={{ color: "#fff" }}>
-            <h2 style={{ marginTop: 0, fontSize: "clamp(24px, 3vw, 36px)", color: "#fff", fontWeight: 700 }}>{ctaSec.heading || "Ready to explore our snacks?"}</h2>
-            <p style={{ opacity: 0.9, marginBottom: 18, color: "#fff" }}>
-              {ctaSec.body || "Browse our wide collection of freshly crafted snacks, made with quality ingredients and authentic recipes."}
-            </p>
-            <Link to="/products" className="btn btn-white">{ctaSec.buttonText || "Explore Menu"}</Link>
-          </div>
-          <div style={{ background: "#fff", borderRadius: 16, padding: 24 }}>
-            <h3 style={{ color: "var(--red)", marginTop: 0 }}>
-              {ctaSec.bulkHeading || "Interested in Bulk Orders or Distribution?"}
-            </h3>
-            <p style={{ color: "var(--text-muted)" }}>
-              {ctaSec.bulkBody || "We're always looking for retail partners and distributors across Nepal. Get factory-direct pricing and dedicated support."}
-            </p>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <Link to="/manufacturing" className="btn btn-red">{ctaSec.bulkButton1 || "Explore Manufacturing"}</Link>
-              <Link to="/contact" className="btn btn-whatsapp">
-                <FiMessageCircle /> {ctaSec.bulkButton2 || "Contact Sales team"}
-              </Link>
+      <section style={{ padding: "40px 0", background: "linear-gradient(to right, #D24A40, #DB7A43, #E1B24A)" }}>
+        <div className="container" style={{ display: "flex", justifyContent: "center" }}>
+          <div className="mfg-cta-card" style={{ position: "relative", overflow: "hidden", borderRadius: 20, boxShadow: "0 30px 80px rgba(0,0,0,0.18)", width: "100%", maxWidth: 960 }}>
+            <img
+              src={encodeURI(ctaSec.image || "/images/hero/kushal namkeen backgraound CTA.png")}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+            />
+            <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.6)" }} />
+            <div className="mfg-cta-content" style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "56px 40px" }}>
+              <h2 style={{ maxWidth: 760, color: "#fff", fontWeight: 700, fontSize: "clamp(24px, 3vw, 36px)", lineHeight: 1.2, margin: 0 }}>
+                {ctaSec.heading || "Ready to explore our snacks?"}
+              </h2>
+              <p style={{ margin: "12px 0 0", maxWidth: 700, fontSize: "clamp(14px, 1.4vw, 17px)", lineHeight: 1.7, color: "rgba(255,255,255,0.95)" }}>
+                {ctaSec.body || "Browse our wide collection of freshly crafted snacks, made with quality ingredients and authentic recipes."}
+              </p>
+              <Link to="/products" className="btn btn-white" style={{ marginTop: 20 }}>{ctaSec.buttonText || "Explore Menu"}</Link>
+              <div className="about-cta-divider" />
+              <h3 style={{ maxWidth: 700, color: "#fff", margin: 0, fontSize: "clamp(18px, 2vw, 24px)" }}>
+                {ctaSec.bulkHeading || "Interested in Bulk Orders or Distribution?"}
+              </h3>
+              <p style={{ margin: "10px 0 0", maxWidth: 700, lineHeight: 1.65, color: "rgba(255,255,255,0.9)" }}>
+                {ctaSec.bulkBody || "We're always looking for retail partners and distributors across Nepal. Get factory-direct pricing and dedicated support."}
+              </p>
+              <div className="about-cta-actions">
+                <Link to="/manufacturing" className="btn btn-red">{ctaSec.bulkButton1 || "Explore Manufacturing"}</Link>
+                <Link to="/contact" className="btn btn-whatsapp">
+                  <FiMessageCircle /> {ctaSec.bulkButton2 || "Contact Sales team"}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <div style={{ background: "#f2e6d3", padding: "60px 0" }}>
         <div className="container">
