@@ -74,7 +74,7 @@ export default function Footer() {
           <ul>
             <li>{settings?.address || "S.N.P-04, SugarMill Area, Bhairahawa Rupandehi"}</li>
             <li>{settings?.contactPhone || "+977 982-0299711"}</li>
-            <li>{settings?.contactEmail || "Support@riyarakshya.com.np"}</li>
+            <li>{settings?.contactEmail || "Support@rnrfood.com"}</li>
           </ul>
         </div>
 

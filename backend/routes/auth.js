@@ -27,7 +27,7 @@ router.get("/me", requireAuth, (req, res) => {
   res.json({ username: req.user.username });
 });
 
-router.post("/change-password", requireAuth, (req, res) => {
+router.post("/change-password", requireAuth, async (req, res) => {
   const { currentPassword, newPassword } = req.body || {};
   const db = readDb();
   if (!bcrypt.compareSync(currentPassword || "", db.admin.passwordHash)) {
@@ -37,7 +37,7 @@ router.post("/change-password", requireAuth, (req, res) => {
     return res.status(400).json({ error: "New password must be at least 6 characters." });
   }
   db.admin.passwordHash = bcrypt.hashSync(newPassword, 10);
-  writeDb(db);
+  await writeDb(db);
   res.json({ ok: true });
 });
 

@@ -40,11 +40,11 @@ visitors will never see a broken or empty page.
 
 ## Quick start (local testing on your own computer)
 
-You'll need [Node.js](https://nodejs.org) installed (version 18 or newer).
+You'll need [Node.js](https://nodejs.org) installed (version 20.19+ or 22.12+) and a running MySQL server. Create a database (for example `rr_food_cms`), then copy `backend/.env.example` to `backend/.env` and enter your MySQL host, database, username, and password. The backend creates its `app_state` table automatically and imports `backend/data/db.json` once if it exists and the MySQL table is empty.
 
 ```bash
 npm run setup       # installs both backend and frontend dependencies
-npm run seed         # loads your product catalogue into the CMS, one time only
+npm run seed         # loads initial products and admin into MySQL (first run)
 npm run seed-pages   # loads default page content into the CMS, one time only
 npm run build        # builds the website
 npm start            # starts the one server — website + admin + API together
@@ -79,8 +79,7 @@ own in `backend/.env` first). Seven sections in the sidebar:
 
 Every screen has a **Save** button — nothing goes live until you click it. Deleting
 a product asks you to confirm first. Photo uploads happen right inside the product
-form. Every save also keeps an automatic timestamped backup in `backend/data/backups/`
-(last 20 kept), so a mistake is always recoverable.
+form. Every save writes the current CMS state to MySQL.
 
 ## Deploying this for real (going live on rnrfood.com)
 
@@ -102,7 +101,15 @@ admin panel, and the API all together.
    - `rnrfood.com/api` → the API
    all work automatically, with no further configuration.
 
-3. **Build steps on the host**, in order:
+3. **Create a MySQL database** on your host and set `MYSQL_HOST`, `MYSQL_PORT`,
+   `MYSQL_USER`, `MYSQL_PASSWORD`, and `MYSQL_DATABASE` before running the seed
+   commands. Also configure the app environment variables (see `backend/.env.example`):
+   `JWT_SECRET` (generate a long random string), `ADMIN_USERNAME`, and `ADMIN_PASSWORD`.
+   If `JWT_SECRET` is left blank, a random one is generated on startup (admin
+   sessions won't survive restarts). `ALLOWED_ORIGIN` can stay as `*` since
+   everything is same-domain now.
+
+4. **Build steps on the host**, in order:
    ```bash
    npm run setup      # install dependencies
    npm run seed       # first deploy only — loads the starting catalogue
@@ -113,12 +120,6 @@ admin panel, and the API all together.
    Most hosts let you set the "build command" to
    `npm run setup && npm run seed && npm run seed-pages && npm run build`
    and the "start command" to `npm start`.
-
-4. **Set environment variables** on your host (see `backend/.env.example`):
-   `JWT_SECRET` (generate a long random string), `ADMIN_USERNAME`, `ADMIN_PASSWORD`.
-   If `JWT_SECRET` is left blank, a random one is generated on startup (admin
-   sessions won't survive restarts). `ALLOWED_ORIGIN` can stay as `*` since
-   everything is same-domain now.
 
 5. Log in at `rnrfood.com/admin` and change the default password right away
    (Site Settings → Change Your Password).

@@ -1,28 +1,18 @@
-// One-time (or re-runnable) migration: pulls the catalogue that used
-// to be hard-coded in the React app's src/data/products.js and loads
-// it into data/db.json so the CMS has something to start from.
+// One-time (or re-runnable) migration: loads the original catalogue into MySQL.
 //
 // Safe to re-run: pass --force to overwrite an existing db.json,
-// otherwise it refuses to clobber real edits the client has made.
+// otherwise it refuses to overwrite a populated MySQL catalogue.
 import bcrypt from "bcryptjs";
-import { readDb, writeDb } from "./db.js";
+import { closeDb, initializeDb, readDb, writeDb } from "./db.js";
 import * as source from "./source-products.mjs";
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.join(__dirname, "data", "db.json");
 const force = process.argv.includes("--force");
-
-if (fs.existsSync(DB_PATH) && !force) {
-  const existing = readDb();
-  if (existing.products?.length) {
-    console.log(
-      "data/db.json already has products in it. Re-run with --force if you really want to overwrite it with the original static catalogue."
-    );
-    process.exit(0);
-  }
+await initializeDb();
+const existing = readDb();
+if (existing.products?.length && !force) {
+  console.log("MySQL already has products. Re-run with --force if you want to overwrite them with the original catalogue.");
+  await closeDb();
+  process.exit(0);
 }
 
 const db = readDb();
@@ -48,3 +38,4 @@ await writeDb(db);
 console.log(`Seeded ${db.products.length} products, ${db.categoryGroups.length} category groups, ${db.varieties.length} varieties, ${db.team.length} team members, ${db.testimonials.length} testimonials.`);
 console.log(`Admin login → username: "${username}"  password: "${password}"`);
 console.log(`IMPORTANT: log in and change this password from the admin panel once it's deployed.`);
+await closeDb();

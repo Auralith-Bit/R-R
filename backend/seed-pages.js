@@ -1,12 +1,6 @@
-// Seeds the page content into data/db.json so the CMS can manage it.
+// Seeds the page content into MySQL so the CMS can manage it.
 // Safe to re-run: only adds pages that don't exist yet, unless --force.
-import { readDb, writeDb } from "./db.js";
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.join(__dirname, "data", "db.json");
+import { closeDb, initializeDb, readDb, writeDb } from "./db.js";
 const force = process.argv.includes("--force");
 
 const PAGE_CONTENT = {
@@ -196,8 +190,8 @@ const PAGE_CONTENT = {
       items: [
         { label: "Customer Support", value: "+977 982-0299711" },
         { label: "Business/Wholesale", value: "+977 985-7021032" },
-        { label: "Support Email", value: "Support@riyarakshya.com.np" },
-        { label: "Sales/Distributors", value: "Sales@riyarakshya.com.np" },
+        { label: "Support Email", value: "Support@rnrfood.com" },
+        { label: "Sales/Distributors", value: "Sales@rnrfood.com" },
         { label: "Address", value: "S.N.P-04, SugarMill Area, Bhairahawa Rupandehi" },
         { label: "Business Hours", value: "Sunday\u2013Friday (9:00 AM \u2013 6:00 PM)" },
       ],
@@ -252,7 +246,7 @@ const PAGE_CONTENT = {
         { q: "Are your snacks vegetarian?", a: "Yes, all our snacks are 100% vegetarian and prepared in a dedicated vegetarian facility." },
         { q: "How can I become a distributor?", a: "Please reach out via our contact form or call our business line. We will guide you through the distributor onboarding process with competitive pricing and dedicated support." },
         { q: "Do you offer bulk order discounts?", a: "Yes, we offer factory-direct pricing for bulk orders and have dedicated support for retailers and distributors. Contact our sales team for custom quotes based on your order volume." },
-        { q: "How can I contact customer support?", a: "You can reach us at +977 982-0299711 for customer support, email us at Support@riyarakshya.com.np, or chat with us on WhatsApp. We are available Sunday-Friday, 9:00 AM to 6:00 PM." },
+        { q: "How can I contact customer support?", a: "You can reach us at +977 982-0299711 for customer support, email us at Support@rnrfood.com, or chat with us on WhatsApp. We are available Sunday-Friday, 9:00 AM to 6:00 PM." },
       ],
     },
   },
@@ -337,6 +331,7 @@ const PAGE_CONTENT = {
   },
 };
 
+await initializeDb();
 const db = readDb();
 if (!db.pages) db.pages = {};
 
@@ -351,3 +346,4 @@ for (const [key, content] of Object.entries(PAGE_CONTENT)) {
 await writeDb(db);
 console.log(`Seeded ${added} page(s) content into db.json.`);
 console.log("Pages:", Object.keys(PAGE_CONTENT).join(", "));
+await closeDb();

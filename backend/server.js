@@ -4,7 +4,7 @@ import cors from "cors";
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
-import { readDb } from "./db.js";
+import { initializeDb, readDb } from "./db.js";
 
 import authRoutes from "./routes/auth.js";
 import catalogRoutes from "./routes/catalog.js";
@@ -103,19 +103,24 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Something went wrong on the server." });
 });
 
-// Friendly first-run check: make sure an admin account exists.
-const dbPath = path.join(__dirname, "data", "db.json");
-if (!fs.existsSync(dbPath) || !readDb().admin) {
-  console.log("\nNo admin account found yet. Run this once before logging in:");
-  console.log("  npm run seed\n");
-}
-if (!frontendBuilt) {
-  console.log("\nNote: frontend/dist not found yet — run `npm run build` in ../frontend to serve the live website from this server.\n");
+async function start() {
+  await initializeDb();
+  if (!readDb().admin) {
+    console.log("\nNo admin account found yet. Run this once before logging in:");
+    console.log("  npm run seed\n");
+  }
+  if (!frontendBuilt) {
+    console.log("\nNote: frontend/dist not found yet — run `npm run build` in ../frontend to serve the live website from this server.\n");
+  }
+  app.listen(PORT, () => {
+    console.log(`R&R Food Products server running on http://localhost:${PORT}`);
+    console.log(`  Website:     http://localhost:${PORT}/`);
+    console.log(`  Admin panel: http://localhost:${PORT}/admin`);
+    console.log(`  API:         http://localhost:${PORT}/api`);
+  });
 }
 
-app.listen(PORT, () => {
-  console.log(`R&R Food Products server running on http://localhost:${PORT}`);
-  console.log(`  Website:     http://localhost:${PORT}/`);
-  console.log(`  Admin panel: http://localhost:${PORT}/admin`);
-  console.log(`  API:         http://localhost:${PORT}/api`);
+start().catch((error) => {
+  console.error(`Unable to start the server: ${error.message}`);
+  process.exitCode = 1;
 });

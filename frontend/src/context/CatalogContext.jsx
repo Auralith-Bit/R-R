@@ -17,7 +17,7 @@ const FALLBACK_DATA = {
   testimonials: fallback.TESTIMONIALS,
   settings: {
     siteName: "R&R Food Products",
-    contactEmail: "Support@riyarakshya.com.np",
+    contactEmail: "Support@rnrfood.com",
     contactPhone: "+977 982-0299711",
     whatsappNumber: "9779857021032",
     address: "S.N.P-04, SugarMill Area, Bhairahawa Rupandehi",
